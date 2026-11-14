@@ -1,0 +1,37 @@
+name: 내일 코디 페이지
+
+on:
+  push:
+    branches: [main]
+    paths: ["days/**", "scripts/**", "closet/**"]
+  schedule:
+    - cron: "40 13 * * *"   # 22:40 KST 백업: Claude 루틴이 실패했을 때만 자동 추천
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow
+      - name: Backup pick (schedule only)
+        if: github.event_name == 'schedule'
+        run: python scripts/fallback_pick.py
+      - run: python scripts/build.py
+      - name: Commit pages
+        run: |
+          git config user.name "daily-outfit-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add days docs
+          git diff --cached --quiet || git commit -m "Build outfit page $(TZ=Asia/Seoul date -d tomorrow +%F)"
+          git push
