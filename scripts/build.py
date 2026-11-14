@@ -101,6 +101,12 @@ h3 { margin:0; font-size:20px; line-height:1.3; }
 .items { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
 .items li { display:grid; grid-template-columns:76px minmax(0,1fr); gap:12px; padding:10px 0; border-top:1px solid var(--line); }
 .items li p { margin:2px 0 0; color:var(--muted); font-size:14px; }
+.items li:has(.thumb) { grid-template-columns:56px minmax(0,1fr); align-items:start; }
+.thumb { width:56px; height:56px; object-fit:contain; background:#fff; border-radius:8px; border:1px solid var(--line); display:block; }
+.items li .part { display:block; padding-top:0; }
+.items li strong { display:block; line-height:1.4; }
+.sub .thumb { width:40px; height:40px; }
+.sub .items li:has(.thumb) { grid-template-columns:40px minmax(0,1fr); }
 .part, .when { font-size:12px; letter-spacing:.04em; color:var(--muted); padding-top:2px; }
 .when { color:var(--accent); font-weight:500; }
 .sub .items li p { display:none; }
@@ -122,7 +128,8 @@ def outfit_block(d, o, idx, prefix):
     rows = ""
     for it in o["items"]:
         c = CLOSET[it["id"]]
-        rows += f'<li><span class="part">{PART[c["cat"]]}</span><div><strong>{e(c["name"])}</strong>'
+        rows += (f'<li><img class="thumb" src="{prefix}items/{c["id"]}.jpg" alt="" loading="lazy"><div>'
+                 f'<span class="part">{e(c.get("acloset_cat") or PART[c["cat"]])}</span><strong>{e(c["name"])}</strong>')
         rows += (f'<p>{e(it.get("note"))}</p>' if it.get("note") else "") + "</div></li>"
     badge = '<span class="badge">추천</span>' if o.get("pick") else '<span class="badge alt">대안</span>'
     main = "main" if idx == 0 else "sub"
@@ -174,6 +181,13 @@ def build():
             p = DOCS / "img" / f"{d['date']}-{i + 1}.jpg"
             if not p.exists() or d is days[0]:
                 compose([it["id"] for it in o["items"]], p)
+    (DOCS / "items").mkdir(parents=True, exist_ok=True)
+    for d in days[:30]:
+        for o in d["outfits"]:
+            for it in o["items"]:
+                src, dst = ITEMS / f"{it['id']}.jpg", DOCS / "items" / f"{it['id']}.jpg"
+                if not dst.exists():
+                    dst.write_bytes(src.read_bytes())
     for i, d in enumerate(days[:30]):
         (DOCS / "archive" / f"{d['date']}.html").write_text(render(d, [], "../"), encoding="utf-8")
     (DOCS / "index.html").write_text(render(days[0], days[1:13], ""), encoding="utf-8")

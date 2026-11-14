@@ -25,7 +25,8 @@
 - 실제로 참고한 링크 2~4개를 refs에 넣는다. 지어낸 링크는 넣지 않는다.
 
 ## 4. 옷 고르기
-- 옷장은 `closet/closet.json` (id, cat[top/bottom/outer/shoes/acc], name, sub, color, sleeve, warmth 1~3, formal 1~3, 신발·가방은 rain_ok).
+- 옷장은 `closet/closet.json` (id, cat[top/bottom/outer/shoes/acc], name, brand, acloset_cat, desc, sub, color, sleeve, warmth 1~3, formal 1~3, 신발·가방은 rain_ok).
+  `name`은 Acloset에 저장된 브랜드 + 색상 + 카테고리로 만든 이름이다. 코디 제목(title), 설명(why), 메모(note)에서 옷을 가리킬 때는 반드시 이 `name`(또는 '브랜드 + 색 + 종류'로 줄인 형태)을 쓴다. 브랜드 없이 "화이트 셔츠"처럼만 쓰지 않는다.
   아이템 사진은 `closet/items/<id>.jpg`. 애매하면 Read로 사진을 직접 본다.
 - 코디 1개 = 상의 1~2개(셔츠+니트 레이어드 가능) + 하의 1 + 신발 1 + (필요하면) 아우터 1 + 가방/액세서리 0~2.
 - 날씨 기준: 평균기온 22°↑ 반팔, 15°↓ 니트·아우터, 8°↓ warmth 3 아우터. 강수 50%↑이면 rain_ok=false 신발 금지. 일교차 8°↑이면 벗기 쉬운 레이어드.
