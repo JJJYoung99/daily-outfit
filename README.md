@@ -17,7 +17,8 @@ Acloset 옷장에 등록한 내 옷으로 매일 밤 10시쯤 내일 코디를 �
 
 ## 옷장 업데이트
 Acloset에 새 옷을 추가했다면 Mac의 Claude에게 "옷장 동기화해줘"라고 하면 돼요.
-`scripts/import_closet.py`가 Acloset 화면 캡처를 아이템 사진과 `closet/closet.json`으로 바꿔요.
+`scripts/import_closet.py`가 Acloset 화면 캡처를 아이템 사진과 `closet/closet.json`으로 바꾸고,
+`scripts/name_items.py`가 Acloset 목록의 브랜드를 붙여 "브랜드 + 색상 + 카테고리" 이름을 만들어요.
 
 ## 직접 다시 돌리기
 Actions 탭 → "내일 코디 페이지" → Run workflow.
