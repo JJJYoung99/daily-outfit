@@ -32,7 +32,8 @@
 - 날씨 기준: 평균기온 22°↑ 반팔, 15°↓ 니트·아우터, 8°↓ warmth 3 아우터. 강수 50%↑이면 rain_ok=false 신발 금지. 일교차 8°↑이면 벗기 쉬운 레이어드.
 - TPO별 formal: 하객·학회 3, 근무·데이트 2, 휴일 1~2. 한 코디 안에서 formal 차이는 1 이하. sport·sandal 신발은 운동·여름 휴일에만.
 - 최근 7일(`days/`)에 추천(pick)한 상의·아우터는 가능하면 반복하지 않는다.
-- "추천"(pick: true) 1개 + 이어지는 "대안" 1개(예: 추우면 코트 추가, 포인트 컬러 하나 버전).
+- "추천"(pick: true) 1개 + "대안" 2개(예: 추우면 코트 추가, 포인트 컬러 하나 버전, 결이 다른 조합). 서로 상의·아우터가 겹치지 않게 하면 좋다.
+- 페이지의 "다른 코디 추천" 버튼은 이 코디들을 차례로 보여주고, 모자라는 만큼(총 6개까지) build.py가 같은 날씨·격식 규칙으로 자동 조합을 채운다.
 
 ## 5. day.json 쓰기
 `days/2026-11-15/day.json`과 같은 형식:
@@ -43,10 +44,9 @@
  "outfits":[{"pick":true,"title":"화이트 셔츠 + 블랙 블레이저","why":"트렌드 근거 포함 2~3문장",
              "items":[{"id":"top-039","note":"이 아이템을 왜·어떻게 입는지 한 줄"}]},
             {"pick":false,"title":"...","why":"...","items":[{"id":"...","note":""}]}],
- "refs":[{"label":"매체 · 제목","url":"https://..."}],
- "plan":{"title":"데이트 코스","note":"...","options":[{"when":"비 안 오면","name":"장소","desc":"..."}]}}
+ "refs":[{"label":"매체 · 제목","url":"https://..."}]}
 ```
-- plan은 외출 일정(약속, 데이트, 결혼식 후 등)이 있을 때만. 일정 근처 구 단위 지역에서 날씨에 맞는 곳 3~4개를 WebSearch로 찾는다. 확인 못 한 운영시간·가게 정보는 쓰지 않는다.
+- 데이트 코스·장소 추천(plan)은 넣지 않는다. 코디만 다룬다.
 - 모든 id가 closet.json에 있는지 확인한다: `python3 -c "import json;c={i['id'] for i in json.load(open('closet/closet.json'))};d=json.load(open('days/<날짜>/day.json'));print([x['id'] for o in d['outfits'] for x in o['items'] if x['id'] not in c])"` → `[]`이어야 한다.
 - `pip install pillow -q && python3 scripts/build.py`로 한 번 빌드해 오류가 없는지 본다. 생성된 `docs/img/<날짜>-1.jpg`를 Read로 확인한다.
 

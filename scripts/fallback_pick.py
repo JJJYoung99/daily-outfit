@@ -28,21 +28,23 @@ def accents(items):
     return {i["color"] for i in items if i["color"] not in NEUTRAL}
 
 
-def pick(w, weekday, seed):
+def pick(w, weekday, seed, formal=None, avoid=()):
+    """avoid: top/outer ids to skip so extra picks look different."""
     rnd = random.Random(seed)
     avg = (w["low"] + w["high"]) / 2
     rainy = w["rain"] >= 50
-    formal = 2 if weekday < 5 else 1
+    if formal is None:
+        formal = 2 if weekday < 5 else 1
     by = lambda cat, f=lambda i: True: [i for i in CLOSET if i["cat"] == cat and f(i)]
     sleeve = "s" if avg >= 22 else "l"
-    tops = by("top", lambda i: i["sleeve"] == sleeve and i["sub"] not in ("tank",) and abs(i["formal"] - formal) <= 1)
+    tops = by("top", lambda i: i["sleeve"] == sleeve and i["sub"] not in ("tank",) and abs(i["formal"] - formal) <= 1 and i["id"] not in avoid)
     if avg < 15:
         tops = [i for i in tops if i["sub"] in ("knit", "shirt", "sweat", "hoodie", "longsleeve", "polo")]
-    bottoms = by("bottom", lambda i: i["sub"] != "shorts" or avg >= 25)
+    bottoms = by("bottom", lambda i: (i["sub"] != "shorts" or avg >= 25) and abs(i["formal"] - formal) <= 1)
     want_warm = 3 if avg < 8 else 2 if avg < 15 else 1
-    outers = by("outer", lambda i: i["warmth"] == want_warm) if avg < 20 else []
-    shoes = by("shoes", lambda i: i["sub"] not in ("sport", "sandal") and (i["rain_ok"] or not rainy))
-    bags = by("acc", lambda i: i["sub"] == "bag")
+    outers = by("outer", lambda i: i["warmth"] == want_warm and abs(i["formal"] - formal) <= 1 and i["id"] not in avoid) if avg < 20 else []
+    shoes = by("shoes", lambda i: i["sub"] not in ("sport", "sandal") and (i["rain_ok"] or not rainy) and abs(i.get("formal", 2) - formal) <= 1)
+    bags = by("acc", lambda i: i["sub"] == "bag" and abs(i.get("formal", 2) - formal) <= 1) or by("acc", lambda i: i["sub"] == "bag")
     for _ in range(400):
         combo = [rnd.choice(tops), rnd.choice(bottoms), rnd.choice(shoes)]
         if outers:

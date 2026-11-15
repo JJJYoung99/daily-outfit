@@ -4,8 +4,11 @@
 day.json outfits list item ids from closet/closet.json; this script composes each outfit
 image from closet/items/<id>.jpg and writes docs/index.html + docs/archive/<date>.html.
 """
-import html, json, pathlib
+import html, json, pathlib, sys
 from PIL import Image
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from fallback_pick import pick as rule_pick  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DAYS, DOCS = ROOT / "days", ROOT / "docs"
@@ -13,6 +16,8 @@ ITEMS = ROOT / "closet" / "items"
 CLOSET = {c["id"]: c for c in json.loads((ROOT / "closet" / "closet.json").read_text(encoding="utf-8"))}
 PART = {"top": "상의", "bottom": "하의", "outer": "아우터", "shoes": "신발", "acc": "가방·액세서리"}
 W, H = 1100, 1300
+TOTAL = 6  # 추천 + 대안 + 옷장 자동 조합을 합쳐 "다른 코디" 버튼으로 넘겨볼 개수
+WEEK = "월화수목금토일"
 
 
 def e(s):
@@ -60,6 +65,34 @@ def load_days():
         if f.exists():
             out.append(json.loads(f.read_text(encoding="utf-8")))
     return out
+
+
+def all_outfits(d):
+    """Claude가 고른 코디(추천 먼저) 뒤에 같은 날씨·격식 기준의 자동 조합을 붙여 TOTAL개로 채운다."""
+    outs = sorted(d["outfits"], key=lambda o: not o.get("pick"))
+    pick_items = [CLOSET[it["id"]] for it in outs[0]["items"] if CLOSET[it["id"]]["cat"] != "acc"]
+    formal = round(sum(i["formal"] for i in pick_items) / len(pick_items))
+    seen = {frozenset(it["id"] for it in o["items"]) for o in outs}
+    avoid = {it["id"] for o in outs for it in o["items"] if CLOSET[it["id"]]["cat"] in ("top", "outer")}
+    wd = WEEK.index(d["weekday"]) if d.get("weekday") in WEEK else 0
+    seed = int(d["date"].replace("-", ""))
+    tries = 0
+    while len(outs) < TOTAL and tries < 30:
+        tries += 1
+        try:
+            combo = rule_pick(d["weather"], wd, seed * 100 + tries, formal=formal, avoid=avoid)
+        except (IndexError, ValueError):
+            break
+        key = frozenset(i["id"] for i in combo)
+        if key in seen:
+            continue
+        seen.add(key)
+        avoid |= {i["id"] for i in combo if i["cat"] in ("top", "outer")}
+        main = [i for i in combo if i["cat"] in ("top", "outer")][:2]
+        outs.append({"pick": False, "auto": True, "title": " + ".join(i["name"] for i in main),
+                     "why": "같은 날씨와 격식 기준(무채색 위주, 포인트 컬러는 하나까지)으로 옷장에서 자동으로 고른 조합이에요.",
+                     "items": [{"id": i["id"], "note": ""} for i in combo]})
+    return outs
 
 
 def fmt_date(iso, wd):
@@ -119,8 +152,32 @@ section { display:flex; flex-direction:column; gap:10px; }
 .strip a { text-decoration:none; }
 .strip img { width:100%; aspect-ratio:1100/1300; object-fit:contain; border-radius:10px; background:#fff; display:block; }
 .strip span { display:block; font-size:12px; color:var(--muted); margin-top:6px; line-height:1.4; }
+.switch { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.switch button { font:inherit; font-size:15px; font-weight:700; padding:12px 20px; border-radius:999px; border:0; background:var(--fg); color:var(--bg); cursor:pointer; min-height:44px; }
+.switch button.ghost { background:transparent; color:var(--fg); border:1px solid var(--line); font-weight:500; padding:12px 16px; }
+.switch button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.switch .count { font-family:var(--mono); font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.js .outfit[hidden] { display:none; }
+.badge.auto { background:transparent; color:var(--accent); border:1px solid var(--accent); }
 footer { font-size:12px; color:var(--muted); }
 @media (max-width:680px) { .outfit, .outfit.sub { grid-template-columns:minmax(0,1fr); } .outfit.main { padding:14px; } .sub figure { max-width:260px; } }
+"""
+
+JS = """
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('#outfits .outfit')), n=cards.length, i=0;
+  var next=document.getElementById('next'), prev=document.getElementById('prev'), count=document.getElementById('count');
+  document.documentElement.classList.add('js');
+  if(n<2){ next.hidden=true; count.hidden=true; return; }
+  function show(k){
+    i=(k+n)%n;
+    cards.forEach(function(c,j){ c.hidden = j!==i; });
+    count.textContent=(i+1)+' / '+n; prev.hidden = i===0;
+    next.textContent = i===n-1 ? '처음부터 다시 보기' : '다른 코디 추천';
+  }
+  next.addEventListener('click', function(){ show(i+1); cards[i].scrollIntoView({block:'nearest', behavior:'smooth'}); });
+  prev.addEventListener('click', function(){ show(0); });
+})();
 """
 
 
@@ -131,22 +188,21 @@ def outfit_block(d, o, idx, prefix):
         rows += (f'<li><img class="thumb" src="{prefix}items/{c["id"]}.jpg" alt="" loading="lazy"><div>'
                  f'<span class="part">{e(c.get("acloset_cat") or PART[c["cat"]])}</span><strong>{e(c["name"])}</strong>')
         rows += (f'<p>{e(it.get("note"))}</p>' if it.get("note") else "") + "</div></li>"
-    badge = '<span class="badge">추천</span>' if o.get("pick") else '<span class="badge alt">대안</span>'
-    main = "main" if idx == 0 else "sub"
-    return (f'<article class="outfit {main}"><figure><img src="{prefix}img/{d["date"]}-{idx + 1}.jpg" alt="{e(o["title"])} 코디" loading="lazy"></figure>'
+    badge = ('<span class="badge">추천</span>' if o.get("pick") else
+             '<span class="badge auto">옷장 자동 조합</span>' if o.get("auto") else '<span class="badge alt">대안</span>')
+    hidden = " hidden" if idx else ""
+    return (f'<article class="outfit main" data-i="{idx}"{hidden}><figure><img src="{prefix}img/{d["date"]}-{idx + 1}.jpg" alt="{e(o["title"])} 코디" loading="lazy"></figure>'
             f'<div class="desc"><div class="otitle">{badge}<h3>{e(o["title"])}</h3></div><p class="why">{e(o["why"])}</p>'
             f'<ul class="items">{rows}</ul></div></article>')
 
 
 def render(d, history, prefix):
     w = d["weather"]
-    outfits = sorted(d["outfits"], key=lambda o: not o.get("pick"))
+    outfits = all_outfits(d)
     blocks = "".join(outfit_block(d, o, i, prefix) for i, o in enumerate(outfits))
-    plan = ""
-    if d.get("plan"):
-        p = d["plan"]
-        opts = "".join(f'<li><span class="when">{e(x["when"])}</span><div><strong>{e(x["name"])}</strong><p>{e(x["desc"])}</p></div></li>' for x in p["options"])
-        plan = f'<section><h2>{e(p["title"])}</h2>' + (f'<p class="note">{e(p.get("note"))}</p>' if p.get("note") else "") + f'<ul class="items">{opts}</ul></section>'
+    switch = (f'<div class="switch"><button type="button" id="next">다른 코디 추천</button>'
+              f'<button type="button" class="ghost" id="prev" hidden>처음 추천으로</button>'
+              f'<span class="count" id="count">1 / {len(outfits)}</span></div>')
     refs = ""
     if d.get("refs"):
         refs = '<section class="refs"><h2>참고한 스타일</h2><ul>' + "".join(
@@ -166,8 +222,9 @@ def render(d, history, prefix):
 <div class="ribbon"><span class="chip">{e(w['place'])} · {e(w['summary'])}</span><span class="chip">기온 <b>{w['low']}° / {w['high']}°</b></span>
 <span class="chip rain">강수확률 <b>{w['rain']}%</b></span><span class="chip tpo">{e(d['tpo']['label'])}</span></div>
 <p class="note">{e(w.get('note'))} {e(d['tpo'].get('source'))}</p>
-{blocks}{plan}{refs}{hist}
-<footer>사진은 Acloset에 등록한 내 옷이에요.</footer></div></body></html>"""
+{switch}<div id="outfits">{blocks}</div>{refs}{hist}
+<footer>사진은 Acloset에 등록한 내 옷이에요.</footer></div>
+<script>{JS}</script></body></html>"""
 
 
 def build():
@@ -176,14 +233,13 @@ def build():
         raise SystemExit("no days")
     (DOCS / "archive").mkdir(parents=True, exist_ok=True)
     for d in days[:30]:
-        outfits = sorted(d["outfits"], key=lambda o: not o.get("pick"))
-        for i, o in enumerate(outfits):
+        for i, o in enumerate(all_outfits(d)):
             p = DOCS / "img" / f"{d['date']}-{i + 1}.jpg"
             if not p.exists() or d is days[0]:
                 compose([it["id"] for it in o["items"]], p)
     (DOCS / "items").mkdir(parents=True, exist_ok=True)
     for d in days[:30]:
-        for o in d["outfits"]:
+        for o in all_outfits(d):
             for it in o["items"]:
                 src, dst = ITEMS / f"{it['id']}.jpg", DOCS / "items" / f"{it['id']}.jpg"
                 if not dst.exists():
