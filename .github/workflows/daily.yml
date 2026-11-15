@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths: ["days/**", "scripts/**", "closet/**"]
   schedule:
-    - cron: "40 13 * * *"   # 22:40 KST 백업: Claude 루틴이 실패했을 때만 자동 추천
+    - cron: "40 11 * * *"   # 20:40 KST 백업: Claude 루틴이 실패했을 때만 자동 추천
   workflow_dispatch:
 
 permissions:

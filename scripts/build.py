@@ -218,7 +218,7 @@ def render(d, history, prefix):
 <title>내일의 코디</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>{CSS}</style></head><body><div class="wrap">
-<header><span class="eyebrow">ACLOSET 옷장 기반 · 매일 밤 10시 업데이트</span><h1>{e(fmt_date(d['date'], d['weekday']))} 코디</h1></header>
+<header><span class="eyebrow">ACLOSET 옷장 기반 · 매일 저녁 8시 업데이트</span><h1>{e(fmt_date(d['date'], d['weekday']))} 코디</h1></header>
 <div class="ribbon"><span class="chip">{e(w['place'])} · {e(w['summary'])}</span><span class="chip">기온 <b>{w['low']}° / {w['high']}°</b></span>
 <span class="chip rain">강수확률 <b>{w['rain']}%</b></span><span class="chip tpo">{e(d['tpo']['label'])}</span></div>
 <p class="note">{e(w.get('note'))} {e(d['tpo'].get('source'))}</p>
