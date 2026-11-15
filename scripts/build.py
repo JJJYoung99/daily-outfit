@@ -152,6 +152,8 @@ section { display:flex; flex-direction:column; gap:10px; }
 .strip a { text-decoration:none; }
 .strip img { width:100%; aspect-ratio:1100/1300; object-fit:contain; border-radius:10px; background:#fff; display:block; }
 .strip span { display:block; font-size:12px; color:var(--muted); margin-top:6px; line-height:1.4; }
+.navlink { display:inline-flex; align-items:center; gap:6px; padding:10px 16px; border-radius:999px; background:var(--surface); border:1px solid var(--line); text-decoration:none; font-weight:500; width:fit-content; }
+.navlink:hover, .navlink:focus-visible { border-color:var(--accent); color:var(--accent); }
 .switch { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
 .switch button { font:inherit; font-size:15px; font-weight:700; padding:12px 20px; border-radius:999px; border:0; background:var(--fg); color:var(--bg); cursor:pointer; min-height:44px; }
 .switch button.ghost { background:transparent; color:var(--fg); border:1px solid var(--line); font-weight:500; padding:12px 16px; }
@@ -219,12 +221,137 @@ def render(d, history, prefix):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>{CSS}</style></head><body><div class="wrap">
 <header><span class="eyebrow">ACLOSET 옷장 기반 · 매일 저녁 8시 업데이트</span><h1>{e(fmt_date(d['date'], d['weekday']))} 코디</h1></header>
+<a class="navlink" href="{prefix}style.html">내 스타일 리포트 · 트렌드 · 쇼핑 리스트 →</a>
 <div class="ribbon"><span class="chip">{e(w['place'])} · {e(w['summary'])}</span><span class="chip">기온 <b>{w['low']}° / {w['high']}°</b></span>
 <span class="chip rain">강수확률 <b>{w['rain']}%</b></span><span class="chip tpo">{e(d['tpo']['label'])}</span></div>
 <p class="note">{e(w.get('note'))} {e(d['tpo'].get('source'))}</p>
 {switch}<div id="outfits">{blocks}</div>{refs}{hist}
 <footer>사진은 Acloset에 등록한 내 옷이에요.</footer></div>
 <script>{JS}</script></body></html>"""
+
+
+NEUTRAL = {"black", "white", "gray", "lightgray", "charcoal", "ivory", "silver"}
+COLOR_KO = {"black": "블랙", "white": "화이트", "charcoal": "차콜", "gray": "그레이", "lightgray": "라이트그레이", "ivory": "아이보리",
+            "navy": "네이비", "brown": "브라운", "beige": "베이지", "lightblue": "라이트블루", "blue": "블루", "silver": "실버"}
+STYLE_CSS = """
+.bars { display:flex; flex-direction:column; gap:8px; }
+.bar { display:grid; grid-template-columns:92px minmax(0,1fr) 44px; gap:10px; align-items:center; font-size:13px; }
+.bar .track { height:12px; background:var(--line); border-radius:999px; overflow:hidden; }
+.bar .fill { height:100%; background:var(--fg); border-radius:999px; }
+.bar .fill.accent { background:var(--accent); }
+.bar b { font-family:var(--mono); font-weight:500; text-align:right; font-variant-numeric:tabular-nums; }
+.stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; }
+.stat { background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:14px; }
+.stat b { display:block; font-family:var(--mono); font-size:26px; font-weight:500; font-variant-numeric:tabular-nums; }
+.stat span { font-size:13px; color:var(--muted); }
+.card { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:18px; display:flex; flex-direction:column; gap:10px; }
+.card h3 { font-size:17px; }
+.card p { margin:0; }
+.grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }
+.tag { display:inline-block; font-size:12px; padding:2px 10px; border-radius:999px; background:var(--accent-soft); color:var(--accent); font-weight:500; }
+.mine { font-size:14px; border-left:3px solid var(--accent); padding-left:10px; color:var(--fg); }
+.src { font-size:12px; color:var(--muted); display:flex; flex-wrap:wrap; gap:6px; }
+.src a { color:var(--muted); }
+.thumbs { display:flex; flex-wrap:wrap; gap:8px; }
+.thumbs figure { width:84px; margin:0; }
+.thumbs img { width:84px; height:84px; object-fit:contain; background:#fff; border:1px solid var(--line); border-radius:10px; display:block; }
+.thumbs figcaption { font-size:11px; color:var(--muted); line-height:1.35; margin-top:4px; }
+ul.plain { margin:0; padding-left:18px; display:flex; flex-direction:column; gap:6px; }
+.navlink { display:inline-flex; align-items:center; gap:6px; padding:10px 16px; border-radius:999px; background:var(--surface); border:1px solid var(--line); text-decoration:none; font-weight:500; width:fit-content; }
+.navlink:hover, .navlink:focus-visible { border-color:var(--accent); color:var(--accent); }
+"""
+
+
+def bar_rows(rows, total, accent=lambda k: False):
+    return '<div class="bars">' + "".join(
+        f'<div class="bar"><span>{e(k)}</span><div class="track"><div class="fill{" accent" if accent(k) else ""}" style="width:{v / total * 100:.1f}%"></div></div><b>{v}</b></div>'
+        for k, v in rows) + "</div>"
+
+
+def thumb(i, prefix):
+    c = CLOSET[i]
+    return f'<figure><img src="{prefix}items/{i}.jpg" alt="" loading="lazy"><figcaption>{e(c["name"])}</figcaption></figure>'
+
+
+def render_style(r):
+    import collections
+    items = list(CLOSET.values())
+    n = len(items)
+    neutral = sum(i["color"] in NEUTRAL for i in items)
+    black = sum(i["color"] == "black" for i in items)
+    cats = collections.Counter(PART[i["cat"]] for i in items).most_common()
+    colors = collections.Counter(i["color"] for i in items)
+    top_colors = [(COLOR_KO.get(k, k), v) for k, v in colors.most_common(8)]
+    other = n - sum(v for _, v in colors.most_common(8))
+    if other:
+        top_colors.append(("기타 컬러", other))
+    neutral_ko = {COLOR_KO[k] for k in NEUTRAL if k in COLOR_KO}
+    tops = [i for i in items if i["cat"] == "top"]
+    casual = sum(i["formal"] == 1 for i in tops)
+    d = r["diagnosis"]
+    stats = (f'<div class="stats"><div class="stat"><b>{n}</b><span>Acloset 옷 전체</span></div>'
+             f'<div class="stat"><b>{neutral / n * 100:.0f}%</b><span>무채색 비율</span></div>'
+             f'<div class="stat"><b>{black / n * 100:.0f}%</b><span>블랙 비율</span></div>'
+             f'<div class="stat"><b>{casual}/{len(tops)}</b><span>캐주얼 상의</span></div></div>')
+    flav = "".join(f'<div class="card"><span class="tag">{e(f["share"])}</span><h3>{e(f["name"])}</h3><p>{e(f["desc"])}</p></div>' for f in d["flavors"])
+    diag = (f'<section><h2>내 옷장 분석</h2>{stats}<div class="grid2"><div class="card"><h3>종류</h3>{bar_rows(cats, n)}</div>'
+            f'<div class="card"><h3>색</h3>{bar_rows(top_colors, n, lambda k: k not in neutral_ko)}</div></div></section>'
+            f'<section><h2>내 스타일</h2><div class="card"><span class="tag">진단</span><h3>{e(d["label"])}</h3><p>{e(d["summary"])}</p></div>'
+            f'<div class="grid2">{flav}</div><div class="grid2"><div class="card"><h3>강점</h3><ul class="plain">'
+            + "".join(f"<li>{e(x)}</li>" for x in d["strengths"]) + '</ul></div><div class="card"><h3>아쉬운 점</h3><ul class="plain">'
+            + "".join(f"<li>{e(x)}</li>" for x in d["gaps"]) + "</ul></div></div></section>")
+    f = r["fit"]
+    fit = (f'<section><h2>{e(f["title"])}</h2><p class="note">{e(f["caveat"])}</p><div class="grid2">'
+           + "".join(f'<div class="card"><h3>{e(x["h"])}</h3><p>{e(x["p"])}</p></div>' for x in f["points"]) + "</div></section>")
+    src = r["sources"]
+    trends = ('<section><h2>2026 가을·겨울 트렌드</h2><div class="grid2">' + "".join(
+        f'<div class="card"><h3>{e(t["name"])}</h3><p>{e(t["desc"])}</p><p class="mine">내 옷장으로: {e(t["mine"])}</p><div class="src">'
+        + " · ".join(f'<a href="{e(src[k]["url"])}" target="_blank" rel="noopener">{e(src[k]["label"])}</a>' for k in t["src"]) + "</div></div>"
+        for t in r["trends"]) + "</div></section>")
+    looks = ""
+    for k, l in enumerate(r["looks"], 1):
+        rows = "".join(f'<li><img class="thumb" src="items/{i}.jpg" alt="" loading="lazy"><div><span class="part">{e(CLOSET[i].get("acloset_cat") or PART[CLOSET[i]["cat"]])}</span><strong>{e(CLOSET[i]["name"])}</strong></div></li>' for i in l["items"])
+        looks += (f'<article class="outfit main"><figure><img src="img/style-{k}.jpg" alt="{e(l["title"])} 코디" loading="lazy"></figure>'
+                  f'<div class="desc"><div class="otitle"><span class="badge">트렌드 코디</span><h3>{e(l["title"])}</h3></div><p class="why">{e(l["why"])}</p><ul class="items">{rows}</ul></div></article>')
+    looks = f'<section><h2>내 옷으로 따라 하는 트렌드 코디</h2>{looks}</section>'
+    mood = ('<section class="refs"><h2>참고 룩북·무드보드</h2><p class="note">런웨이·핀터레스트 사진은 저작권 때문에 직접 싣지 않고 링크로 모았어요.</p><ul>'
+            + "".join(f'<li><a href="{e(m["url"])}" target="_blank" rel="noopener">{e(m["label"])}</a></li>' for m in r["moodboards"]) + "</ul></section>")
+    buy = ('<section><h2>있으면 좋은 옷</h2><div class="grid2">' + "".join(
+        f'<div class="card"><h3>{e(b["what"])}</h3><p>{e(b["why"])}</p>'
+        + ('<div class="src">' + " · ".join(f'<a href="{e(x["url"])}" target="_blank" rel="noopener">{e(x["label"])}</a>' for x in b["brands"]) + "</div>" if b["brands"] else "")
+        + "</div>" for b in r["buy"]) + "</div></section>")
+    clean = ('<section><h2>정리해도 좋을 옷</h2><p class="note">버리라는 뜻은 아니에요. 지금 취향과 잘 안 맞거나 겹치는 옷이라 코디 추천에서 잘 안 쓰이는 후보예요.</p>'
+             + "".join(f'<div class="card"><h3>{e(g["group"])}</h3><p>{e(g["why"])}</p><div class="thumbs">' + "".join(thumb(i, "") for i in g["items"]) + "</div></div>" for g in r["clean"])
+             + "</section>")
+    refs = ('<section class="refs"><h2>출처</h2><ul>' + "".join(
+        f'<li><a href="{e(x["url"])}" target="_blank" rel="noopener">{e(x["label"])}</a></li>' for x in src) + "</ul></section>")
+    return f"""<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>내 스타일 리포트</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>{CSS}{STYLE_CSS}</style></head><body><div class="wrap">
+<a class="navlink" href="./">← 내일의 코디</a>
+<header><span class="eyebrow">ACLOSET 옷장 {n}벌 분석 · {e(r["updated"])} 기준</span><h1>내 스타일 리포트</h1></header>
+{diag}{fit}{trends}{looks}{mood}{buy}{clean}{refs}
+<footer>트렌드와 추천은 위 출처를 바탕으로 정리했어요. 제품 가격·재고는 각 사이트에서 확인하세요.</footer></div></body></html>"""
+
+
+def build_style():
+    f = ROOT / "style" / "report.json"
+    if not f.exists():
+        return
+    r = json.loads(f.read_text(encoding="utf-8"))
+    used = set()
+    for k, l in enumerate(r["looks"], 1):
+        compose(l["items"], DOCS / "img" / f"style-{k}.jpg")
+        used |= set(l["items"])
+    for g in r["clean"]:
+        used |= set(g["items"])
+    for i in used:
+        dst = DOCS / "items" / f"{i}.jpg"
+        if not dst.exists():
+            dst.write_bytes((ITEMS / f"{i}.jpg").read_bytes())
+    (DOCS / "style.html").write_text(render_style(r), encoding="utf-8")
 
 
 def build():
@@ -247,6 +374,7 @@ def build():
     for i, d in enumerate(days[:30]):
         (DOCS / "archive" / f"{d['date']}.html").write_text(render(d, [], "../"), encoding="utf-8")
     (DOCS / "index.html").write_text(render(days[0], days[1:13], ""), encoding="utf-8")
+    build_style()
     (DOCS / ".nojekyll").write_text("")
     print("built", days[0]["date"])
 

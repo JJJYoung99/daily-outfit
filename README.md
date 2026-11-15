@@ -13,6 +13,9 @@ Acloset 옷장에 등록한 내 옷으로 매일 저녁 8시쯤 내일 코디를
 
 컴퓨터가 꺼져 있어도 GitHub 서버와 Claude 클라우드에서 돌아가요.
 
+## 내 스타일 리포트
+옷장 분석, 어울리는 방향, 2026 FW 트렌드, 내 옷으로 만든 트렌드 코디, 사면 좋은 옷, 정리 후보: https://jjjyoung99.github.io/daily-outfit/style.html (내용은 `style/report.json`)
+
 ## 스타일 기준
 모던, 무채색 위주. 포인트 컬러는 코디 전체에서 하나까지.
 
