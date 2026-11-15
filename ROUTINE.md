@@ -10,6 +10,7 @@
   네이비·베이지·브라운·블루도 각각 한 색으로 센다. 여러 색이 섞인 코디는 고르지 않는다.
 
 ## 1. 내일 날씨
+- (클라우드 환경에선 Open-Meteo가 막혀 있을 수 있다. 막히면 바로 WebSearch로 넘어간다.)
 - `curl -s "https://api.open-meteo.com/v1/forecast?latitude=37.53&longitude=126.98&timezone=Asia%2FSeoul&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code&start_date=<내일>&end_date=<내일>"`
 - 막히면 WebSearch로 "서울 내일 날씨"를 찾는다. 일정 장소가 서울 밖이면 그 지역 날씨를 쓴다.
 
@@ -51,6 +52,8 @@
 - `pip install pillow -q && python3 scripts/build.py`로 한 번 빌드해 오류가 없는지 본다. 생성된 `docs/img/<날짜>-1.jpg`를 Read로 확인한다.
 
 ## 6. 커밋
-- `git add days docs && git commit -m "Outfit for <날짜>" && git push origin main`
+- `git add days && git commit -m "Outfit for <날짜>"` (docs/는 커밋하지 않는다. Actions가 다시 만든다.)
+- 먼저 `git push origin HEAD:refs/heads/main`을 시도한다. 거부되면(권한·브랜치 제한) `git push origin HEAD:refs/heads/outfit/<날짜>`로 올린다.
+  outfit/ 브랜치로 올라오면 GitHub Actions가 days/를 main에 합치고 페이지를 만든 뒤 그 브랜치를 지운다. PR은 만들지 않는다.
 - 이미 그 날짜 day.json이 있으면(백업이 먼저 돈 경우 등) 덮어쓴다.
 - 마지막 메시지: "내일(M/D) 코디: <추천 제목> — x~y°, 강수 z%, <TPO>" 와 페이지 링크 https://jjjyoung99.github.io/daily-outfit/

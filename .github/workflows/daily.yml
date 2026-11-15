@@ -2,7 +2,7 @@ name: 내일 코디 페이지
 
 on:
   push:
-    branches: [main]
+    branches: [main, "outfit/**"]
     paths: ["days/**", "scripts/**", "closet/**"]
   schedule:
     - cron: "40 11 * * *"   # 20:40 KST 백업: Claude 루틴이 실패했을 때만 자동 추천
@@ -20,6 +20,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Take days/ from a routine branch (outfit/**)
+        if: startsWith(github.ref, 'refs/heads/outfit/')
+        run: |
+          BR="${GITHUB_REF#refs/heads/}"
+          git fetch origin "$BR"
+          git checkout "origin/$BR" -- days
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -36,7 +45,10 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "Build outfit page $(TZ=Asia/Seoul date -d tomorrow +%F)"
           for i in 1 2 3; do
-            git pull --rebase -X theirs origin main && git push && exit 0
+            git pull --rebase -X theirs origin main && git push origin HEAD:main && break
             sleep 5
           done
-          exit 1
+          git diff --quiet HEAD origin/main || exit 1
+      - name: Delete routine branch
+        if: startsWith(github.ref, 'refs/heads/outfit/')
+        run: git push origin --delete "${GITHUB_REF#refs/heads/}" || true
