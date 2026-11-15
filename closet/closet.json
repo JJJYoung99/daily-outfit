@@ -1674,7 +1674,8 @@
   "warmth": 1,
   "desc": "블랙 나일론 파라슈트 팬츠",
   "brand": "KAPPY DESIGN",
-  "acloset_cat": "긴바지"
+  "acloset_cat": "긴바지",
+  "season": "summer"
  },
  {
   "id": "bottom-017",
@@ -1983,10 +1984,11 @@
   "color": "charcoal",
   "formal": 3,
   "sleeve": "l",
-  "warmth": 2,
+  "warmth": 1,
   "desc": "차콜 투턱 슬랙스",
   "brand": "블랭크룸",
-  "acloset_cat": "정장바지"
+  "acloset_cat": "정장바지",
+  "season": "summer"
  },
  {
   "id": "bottom-041",
@@ -1996,10 +1998,11 @@
   "color": "gray",
   "formal": 2,
   "sleeve": "l",
-  "warmth": 2,
+  "warmth": 1,
   "desc": "그레이 밴딩 슬랙스",
   "brand": "쿠어",
-  "acloset_cat": "정장바지"
+  "acloset_cat": "정장바지",
+  "season": "summer"
  },
  {
   "id": "bottom-042",
@@ -2022,10 +2025,11 @@
   "color": "gray",
   "formal": 3,
   "sleeve": "l",
-  "warmth": 2,
+  "warmth": 1,
   "desc": "그레이 핀스트라이프 투턱 슬랙스",
   "brand": "BEGIN 2.0.2",
-  "acloset_cat": "정장바지"
+  "acloset_cat": "정장바지",
+  "season": "summer"
  },
  {
   "id": "bottom-044",
@@ -2035,10 +2039,11 @@
   "color": "black",
   "formal": 2,
   "sleeve": "l",
-  "warmth": 2,
+  "warmth": 1,
   "desc": "블랙 밴딩 슬랙스",
   "brand": "ADER ERROR",
-  "acloset_cat": "정장바지"
+  "acloset_cat": "정장바지",
+  "season": "summer"
  },
  {
   "id": "bottom-045",
@@ -2048,10 +2053,11 @@
   "color": "navy",
   "formal": 3,
   "sleeve": "l",
-  "warmth": 2,
+  "warmth": 1,
   "desc": "네이비 스트라이프 와이드 슬랙스",
   "brand": "쿠어",
-  "acloset_cat": "정장바지"
+  "acloset_cat": "정장바지",
+  "season": "summer"
  },
  {
   "id": "bottom-046",
@@ -2061,10 +2067,11 @@
   "color": "charcoal",
   "formal": 2,
   "sleeve": "l",
-  "warmth": 2,
+  "warmth": 1,
   "desc": "차콜 밴딩 슬랙스",
   "brand": "",
-  "acloset_cat": "정장바지"
+  "acloset_cat": "정장바지",
+  "season": "summer"
  },
  {
   "id": "bottom-047",
@@ -2074,10 +2081,11 @@
   "color": "black",
   "formal": 2,
   "sleeve": "l",
-  "warmth": 2,
+  "warmth": 1,
   "desc": "블랙 치노 슬랙스",
   "brand": "siiido",
-  "acloset_cat": "정장바지"
+  "acloset_cat": "정장바지",
+  "season": "summer"
  },
  {
   "id": "bottom-048",
@@ -2087,10 +2095,11 @@
   "color": "black",
   "formal": 2,
   "sleeve": "l",
-  "warmth": 2,
+  "warmth": 1,
   "desc": "블랙 밴딩 테이퍼드 슬랙스",
   "brand": "ZARA",
-  "acloset_cat": "정장바지"
+  "acloset_cat": "정장바지",
+  "season": "summer"
  },
  {
   "id": "bottom-049",

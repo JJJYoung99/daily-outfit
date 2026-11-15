@@ -40,7 +40,7 @@ def pick(w, weekday, seed, formal=None, avoid=()):
     tops = by("top", lambda i: i["sleeve"] == sleeve and i["sub"] not in ("tank",) and abs(i["formal"] - formal) <= 1 and i["id"] not in avoid)
     if avg < 15:
         tops = [i for i in tops if i["sub"] in ("knit", "shirt", "sweat", "hoodie", "longsleeve", "polo")]
-    bottoms = by("bottom", lambda i: (i["sub"] != "shorts" or avg >= 25) and abs(i["formal"] - formal) <= 1)
+    bottoms = by("bottom", lambda i: (i["sub"] != "shorts" or avg >= 25) and (i.get("season") != "summer" or avg >= 20) and abs(i["formal"] - formal) <= 1)
     want_warm = 3 if avg < 8 else 2 if avg < 15 else 1
     outers = by("outer", lambda i: i["warmth"] == want_warm and abs(i["formal"] - formal) <= 1 and i["id"] not in avoid) if avg < 20 else []
     shoes = by("shoes", lambda i: i["sub"] not in ("sport", "sandal") and (i["rain_ok"] or not rainy) and abs(i.get("formal", 2) - formal) <= 1)

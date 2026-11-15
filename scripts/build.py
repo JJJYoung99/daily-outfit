@@ -155,6 +155,7 @@ section { display:flex; flex-direction:column; gap:10px; }
 .switch { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
 .switch button { font:inherit; font-size:15px; font-weight:700; padding:12px 20px; border-radius:999px; border:0; background:var(--fg); color:var(--bg); cursor:pointer; min-height:44px; }
 .switch button.ghost { background:transparent; color:var(--fg); border:1px solid var(--line); font-weight:500; padding:12px 16px; }
+.switch button:disabled { opacity:.35; cursor:default; }
 .switch button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
 .switch .count { font-family:var(--mono); font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
 .js .outfit[hidden] { display:none; }
@@ -168,15 +169,14 @@ JS = """
   var cards=[].slice.call(document.querySelectorAll('#outfits .outfit')), n=cards.length, i=0;
   var next=document.getElementById('next'), prev=document.getElementById('prev'), count=document.getElementById('count');
   document.documentElement.classList.add('js');
-  if(n<2){ next.hidden=true; count.hidden=true; return; }
+  if(n<2){ next.hidden=true; prev.hidden=true; count.hidden=true; return; }
   function show(k){
     i=(k+n)%n;
     cards.forEach(function(c,j){ c.hidden = j!==i; });
-    count.textContent=(i+1)+' / '+n; prev.hidden = i===0;
-    next.textContent = i===n-1 ? '처음부터 다시 보기' : '다른 코디 추천';
+    count.textContent=(i+1)+' / '+n; prev.disabled = i===0;
   }
   next.addEventListener('click', function(){ show(i+1); cards[i].scrollIntoView({block:'nearest', behavior:'smooth'}); });
-  prev.addEventListener('click', function(){ show(0); });
+  prev.addEventListener('click', function(){ if(i>0){ show(i-1); cards[i].scrollIntoView({block:'nearest', behavior:'smooth'}); } });
 })();
 """
 
@@ -200,8 +200,8 @@ def render(d, history, prefix):
     w = d["weather"]
     outfits = all_outfits(d)
     blocks = "".join(outfit_block(d, o, i, prefix) for i, o in enumerate(outfits))
-    switch = (f'<div class="switch"><button type="button" id="next">다른 코디 추천</button>'
-              f'<button type="button" class="ghost" id="prev" hidden>처음 추천으로</button>'
+    switch = (f'<div class="switch"><button type="button" class="ghost" id="prev" disabled>이전 코디</button>'
+              f'<button type="button" id="next">다른 코디 추천</button>'
               f'<span class="count" id="count">1 / {len(outfits)}</span></div>')
     refs = ""
     if d.get("refs"):
