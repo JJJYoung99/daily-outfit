@@ -23,7 +23,8 @@
   "warmth": 3,
   "desc": "아이보리 모크넥 니트",
   "brand": "미나브",
-  "acloset_cat": "니트"
+  "acloset_cat": "니트",
+  "exclude": "discarded"
  },
  {
   "id": "top-003",
@@ -49,7 +50,8 @@
   "warmth": 2,
   "desc": "라이트그레이 크루넥 니트",
   "brand": "더니트컴퍼니",
-  "acloset_cat": "니트"
+  "acloset_cat": "니트",
+  "casual_only": true
  },
  {
   "id": "top-005",
@@ -62,7 +64,8 @@
   "warmth": 2,
   "desc": "아이보리 크루넥 니트",
   "brand": "더니트컴퍼니",
-  "acloset_cat": "니트"
+  "acloset_cat": "니트",
+  "casual_only": true
  },
  {
   "id": "top-006",
@@ -272,7 +275,8 @@
   "warmth": 3,
   "desc": "브라운 하프집 니트",
   "brand": "NONBLANK",
-  "acloset_cat": "니트"
+  "acloset_cat": "니트",
+  "casual_only": true
  },
  {
   "id": "top-022",
@@ -337,7 +341,8 @@
   "warmth": 3,
   "desc": "그레이 하프집 니트",
   "brand": "DRAW FIT",
-  "acloset_cat": "니트"
+  "acloset_cat": "니트",
+  "casual_only": true
  },
  {
   "id": "top-027",
@@ -350,7 +355,8 @@
   "warmth": 3,
   "desc": "블랙 모크넥 니트",
   "brand": "",
-  "acloset_cat": "니트"
+  "acloset_cat": "니트",
+  "casual_only": true
  },
  {
   "id": "top-028",
@@ -363,7 +369,8 @@
   "warmth": 3,
   "desc": "그레이 터틀넥 니트",
   "brand": "",
-  "acloset_cat": "니트"
+  "acloset_cat": "니트",
+  "casual_only": true
  },
  {
   "id": "top-029",
@@ -402,7 +409,8 @@
   "warmth": 2,
   "desc": "그레이 멜란지 크루넥 니트",
   "brand": "ZARA",
-  "acloset_cat": "니트"
+  "acloset_cat": "니트",
+  "casual_only": true
  },
  {
   "id": "top-032",
@@ -415,7 +423,8 @@
   "warmth": 2,
   "desc": "블랙 브이넥 니트",
   "brand": "artifact",
-  "acloset_cat": "니트"
+  "acloset_cat": "니트",
+  "casual_only": true
  },
  {
   "id": "top-033",
@@ -2934,7 +2943,8 @@
   "warmth": 2,
   "desc": "블랙 브이넥 가디건",
   "brand": "LMOOD",
-  "acloset_cat": "가디건"
+  "acloset_cat": "가디건",
+  "casual_only": true
  },
  {
   "id": "outer-056",
@@ -2999,7 +3009,8 @@
   "warmth": 2,
   "desc": "차콜 라운드 가디건",
   "brand": "무신사 스탠다드",
-  "acloset_cat": "가디건"
+  "acloset_cat": "가디건",
+  "casual_only": true
  },
  {
   "id": "outer-061",
@@ -3074,7 +3085,9 @@
   "rain_ok": true,
   "desc": "블랙 레더 저먼 트레이너",
   "brand": "투스페이스",
-  "acloset_cat": "스니커즈"
+  "acloset_cat": "스니커즈",
+  "comfort": "low",
+  "note_user": "크고 불편함(평발). 깔창 넣기 전엔 거의 추천 안 함"
  },
  {
   "id": "shoes-004",
@@ -3459,6 +3472,7 @@
   "warmth": 2,
   "desc": "차콜 핀스트라이프 투턱 와이드 슬랙스 (Slacks Product. 72)",
   "brand": "ADER ERROR",
-  "acloset_cat": "정장바지"
+  "acloset_cat": "정장바지",
+  "exclude": "not_arrived"
  }
 ]

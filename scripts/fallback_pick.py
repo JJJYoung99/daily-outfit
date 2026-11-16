@@ -17,7 +17,8 @@ TIER_W = {"premium": 2.0, "designer": 1.8, "core": 1.4, "basic": 0.6}
 
 def weighted(rnd, items):
     """좋아하는 브랜드·안 입은 옷일수록 잘 뽑히게: 브랜드 가중치 × 사용 횟수 역수."""
-    ws = [TIER_W[tier(i)] * (3.0 if USED[i["id"]] == 0 else 1.0 / (1 + USED[i["id"]])) for i in items]
+    ws = [TIER_W[tier(i)] * (3.0 if USED[i["id"]] == 0 else 1.0 / (1 + USED[i["id"]]))
+          * (0.15 if i.get("comfort") == "low" else 1.0) for i in items]
     return rnd.choices(items, weights=ws)[0]
 NEUTRAL = {"black", "white", "gray", "lightgray", "charcoal", "ivory", "silver"}
 WEEK = "월화수목금토일"
@@ -45,7 +46,9 @@ def pick(w, weekday, seed, formal=None, avoid=()):
     rainy = w["rain"] >= 50
     if formal is None:
         formal = 2 if weekday < 5 else 1
-    by = lambda cat, f=lambda i: True: [i for i in CLOSET if i["cat"] == cat and f(i)]
+    # 저가 니트(casual_only)는 아주 편한 휴일(formal 1)에만 쓴다.
+    by = lambda cat, f=lambda i: True: [i for i in CLOSET if i["cat"] == cat and f(i)
+                                        and not (i.get("casual_only") and formal >= 2)]
     sleeve = "s" if avg >= 22 else "l"
     tops = by("top", lambda i: i["sleeve"] == sleeve and i["sub"] not in ("tank",) and abs(i["formal"] - formal) <= 1 and i["id"] not in avoid)
     if avg < 15:
