@@ -3444,5 +3444,18 @@
   "desc": "실버 클로버 목걸이",
   "brand": "줄로리아",
   "acloset_cat": "목걸이"
+ },
+ {
+  "id": "bottom-058",
+  "cat": "bottom",
+  "name": "ADER ERROR 차콜 핀스트라이프 와이드 정장바지",
+  "sub": "slacks",
+  "color": "charcoal",
+  "formal": 3,
+  "sleeve": "l",
+  "warmth": 2,
+  "desc": "차콜 핀스트라이프 투턱 와이드 슬랙스 (Slacks Product. 72)",
+  "brand": "ADER ERROR",
+  "acloset_cat": "정장바지"
  }
 ]
