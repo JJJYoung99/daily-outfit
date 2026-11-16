@@ -62,6 +62,9 @@ def pick(w, weekday, seed, formal=None, avoid=()):
         combo = [weighted(rnd, tops), weighted(rnd, bottoms), weighted(rnd, shoes)]
         if outers:
             combo.insert(1, weighted(rnd, outers))
+        subs = {i["sub"] for i in combo}
+        if "knit" in subs and subs & {"cardigan", "knitzip"}:  # 니트 이너 + 니트 가디건/집업 조합은 쓰지 않는다
+            continue
         tiers = {tier(i) for i in combo}
         if (len(accents(combo)) <= 1 and max(i["formal"] for i in combo) - min(i["formal"] for i in combo) <= 1
                 and tiers & {"premium", "designer"} and tiers != {"basic"}):

@@ -10,7 +10,8 @@
   "warmth": 3,
   "desc": "블랙 모크넥 니트",
   "brand": "미나브",
-  "acloset_cat": "니트"
+  "acloset_cat": "니트",
+  "casual_only": true
  },
  {
   "id": "top-002",
@@ -24,7 +25,8 @@
   "desc": "아이보리 모크넥 니트",
   "brand": "미나브",
   "acloset_cat": "니트",
-  "exclude": "discarded"
+  "exclude": "discarded",
+  "casual_only": true
  },
  {
   "id": "top-003",
@@ -50,8 +52,7 @@
   "warmth": 2,
   "desc": "라이트그레이 크루넥 니트",
   "brand": "더니트컴퍼니",
-  "acloset_cat": "니트",
-  "casual_only": true
+  "acloset_cat": "니트"
  },
  {
   "id": "top-005",
@@ -64,8 +65,7 @@
   "warmth": 2,
   "desc": "아이보리 크루넥 니트",
   "brand": "더니트컴퍼니",
-  "acloset_cat": "니트",
-  "casual_only": true
+  "acloset_cat": "니트"
  },
  {
   "id": "top-006",
@@ -275,8 +275,7 @@
   "warmth": 3,
   "desc": "브라운 하프집 니트",
   "brand": "NONBLANK",
-  "acloset_cat": "니트",
-  "casual_only": true
+  "acloset_cat": "니트"
  },
  {
   "id": "top-022",
@@ -423,8 +422,7 @@
   "warmth": 2,
   "desc": "블랙 브이넥 니트",
   "brand": "artifact",
-  "acloset_cat": "니트",
-  "casual_only": true
+  "acloset_cat": "니트"
  },
  {
   "id": "top-033",
