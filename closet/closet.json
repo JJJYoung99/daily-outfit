@@ -218,7 +218,8 @@
   "warmth": 2,
   "desc": "화이트 크루넥 니트",
   "brand": "BOSS",
-  "acloset_cat": "니트"
+  "acloset_cat": "니트",
+  "exclude": "sport"
  },
  {
   "id": "top-018",
@@ -231,7 +232,8 @@
   "warmth": 1,
   "desc": "화이트 헨리넥 긴팔",
   "brand": "LACOSTE",
-  "acloset_cat": "긴팔 티"
+  "acloset_cat": "긴팔 티",
+  "exclude": "sport"
  },
  {
   "id": "top-019",
@@ -2359,7 +2361,8 @@
   "warmth": 1,
   "desc": "차콜 후드 집업",
   "brand": "LULULEMON",
-  "acloset_cat": "후드 집업"
+  "acloset_cat": "후드 집업",
+  "exclude": "sport"
  },
  {
   "id": "outer-012",

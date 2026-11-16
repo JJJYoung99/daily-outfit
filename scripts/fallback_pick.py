@@ -8,7 +8,17 @@ import datetime as dt, json, pathlib, random, urllib.request
 from zoneinfo import ZoneInfo
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-CLOSET = json.loads((ROOT / "closet" / "closet.json").read_text(encoding="utf-8"))
+CLOSET = [i for i in json.loads((ROOT / "closet" / "closet.json").read_text(encoding="utf-8")) if not i.get("exclude")]
+import sys; sys.path.insert(0, str(ROOT / "scripts"))
+from usage import history, tier  # noqa: E402
+USED, _ = history()
+TIER_W = {"premium": 2.0, "designer": 1.8, "core": 1.4, "basic": 0.6}
+
+
+def weighted(rnd, items):
+    """좋아하는 브랜드·안 입은 옷일수록 잘 뽑히게: 브랜드 가중치 × 사용 횟수 역수."""
+    ws = [TIER_W[tier(i)] * (3.0 if USED[i["id"]] == 0 else 1.0 / (1 + USED[i["id"]])) for i in items]
+    return rnd.choices(items, weights=ws)[0]
 NEUTRAL = {"black", "white", "gray", "lightgray", "charcoal", "ivory", "silver"}
 WEEK = "월화수목금토일"
 WMO = {0: "맑음", 1: "대체로 맑음", 2: "구름 조금", 3: "흐림", 45: "안개", 48: "안개", 51: "이슬비", 53: "이슬비", 55: "이슬비",
@@ -46,10 +56,12 @@ def pick(w, weekday, seed, formal=None, avoid=()):
     shoes = by("shoes", lambda i: i["sub"] not in ("sport", "sandal") and (i["rain_ok"] or not rainy) and abs(i.get("formal", 2) - formal) <= 1)
     bags = by("acc", lambda i: i["sub"] == "bag" and abs(i.get("formal", 2) - formal) <= 1) or by("acc", lambda i: i["sub"] == "bag")
     for _ in range(400):
-        combo = [rnd.choice(tops), rnd.choice(bottoms), rnd.choice(shoes)]
+        combo = [weighted(rnd, tops), weighted(rnd, bottoms), weighted(rnd, shoes)]
         if outers:
-            combo.insert(1, rnd.choice(outers))
-        if len(accents(combo)) <= 1 and max(i["formal"] for i in combo) - min(i["formal"] for i in combo) <= 1:
+            combo.insert(1, weighted(rnd, outers))
+        tiers = {tier(i) for i in combo}
+        if (len(accents(combo)) <= 1 and max(i["formal"] for i in combo) - min(i["formal"] for i in combo) <= 1
+                and tiers & {"premium", "designer"} and tiers != {"basic"}):
             return combo + [rnd.choice(bags)]
     return combo + [rnd.choice(bags)]
 
