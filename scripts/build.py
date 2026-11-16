@@ -70,6 +70,8 @@ def load_days():
 def all_outfits(d):
     """Claude가 고른 코디(추천 먼저) 뒤에 같은 날씨·격식 기준의 자동 조합을 붙여 TOTAL개로 채운다."""
     outs = sorted(d["outfits"], key=lambda o: not o.get("pick"))
+    if d.get("no_auto"):  # 여행처럼 챙긴 옷만 써야 하는 날은 자동 조합을 붙이지 않는다
+        return outs
     pick_items = [CLOSET[it["id"]] for it in outs[0]["items"] if CLOSET[it["id"]]["cat"] != "acc"]
     formal = round(sum(i["formal"] for i in pick_items) / len(pick_items))
     seen = {frozenset(it["id"] for it in o["items"]) for o in outs}
