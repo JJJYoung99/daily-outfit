@@ -2264,7 +2264,8 @@
   "warmth": 3,
   "desc": "블랙 퀼팅 롱 다운코트",
   "brand": "메종 마르지엘라",
-  "acloset_cat": "코트"
+  "acloset_cat": "코트",
+  "exclude": "duplicate"
  },
  {
   "id": "outer-004",
