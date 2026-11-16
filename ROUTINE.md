@@ -63,5 +63,5 @@
 - `git add days && git commit -m "Outfit for <날짜>"` (docs/는 커밋하지 않는다. Actions가 다시 만든다.)
 - 먼저 `git push origin HEAD:refs/heads/main`을 시도한다. 거부되면(권한·브랜치 제한) `git push origin HEAD:refs/heads/outfit/<날짜>`로 올린다.
   outfit/ 브랜치로 올라오면 GitHub Actions가 days/를 main에 합치고 페이지를 만든 뒤 그 브랜치를 지운다. PR은 만들지 않는다.
-- 이미 그 날짜 day.json이 있으면(백업이 먼저 돈 경우 등) 덮어쓴다.
+- 이미 그 날짜 day.json이 있으면(백업이 먼저 돈 경우 등) 덮어쓴다. **단, `"locked": true`가 있으면 사용자가 정한 일정이므로 건드리지 말고 커밋 없이 끝낸다.**
 - 마지막 메시지: "내일(M/D) 코디: <추천 제목> — x~y°, 강수 z%, <TPO>" 와 페이지 링크 https://jjjyoung99.github.io/daily-outfit/
