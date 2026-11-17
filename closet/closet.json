@@ -65,7 +65,8 @@
   "warmth": 2,
   "desc": "아이보리 크루넥 니트",
   "brand": "더니트컴퍼니",
-  "acloset_cat": "니트"
+  "acloset_cat": "니트",
+  "exclude": "not_owned"
  },
  {
   "id": "top-006",
@@ -2693,7 +2694,7 @@
   "formal": 3,
   "sleeve": "l",
   "warmth": 2,
-  "desc": "토프 베이지 블레이저",
+  "desc": "토프 블레이저. 어깨선이 많이 떨어지는 드롭숄더, 찰랑하게 떨어지는 드레이프 핏",
   "brand": "BEAMS JAPAN",
   "acloset_cat": "블레이저"
  },
