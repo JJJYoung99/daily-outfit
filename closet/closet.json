@@ -1910,13 +1910,13 @@
  {
   "id": "bottom-034",
   "cat": "bottom",
-  "name": "블랭크룸 블랙 와이드 긴바지",
+  "name": "블랭크룸 다크브라운 긴바지",
   "sub": "pants",
-  "color": "black",
+  "color": "darkbrown",
   "formal": 2,
   "sleeve": "l",
   "warmth": 2,
-  "desc": "블랙 와이드 팬츠",
+  "desc": "다크브라운 팬츠 (와이드 아님)",
   "brand": "블랭크룸",
   "acloset_cat": "긴바지"
  },
