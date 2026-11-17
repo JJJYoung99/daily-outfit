@@ -70,3 +70,6 @@
   outfit/ 브랜치로 올라오면 GitHub Actions가 days/를 main에 합치고 페이지를 만든 뒤 그 브랜치를 지운다. PR은 만들지 않는다.
 - 이미 그 날짜 day.json이 있으면(백업이 먼저 돈 경우 등) 덮어쓴다. **단, `"locked": true`가 있으면 사용자가 정한 일정이므로 건드리지 말고 커밋 없이 끝낸다.**
 - 마지막 메시지: "내일(M/D) 코디: <추천 제목> — x~y°, 강수 z%, <TPO>" 와 페이지 링크 https://jjjyoung99.github.io/daily-outfit/
+
+## 저장한 코디 (favorites.json)
+사용자가 마음에 든다고 한 코디는 favorites.json에 스냅샷으로 저장하고, build.py가 docs/favorites.html로 만든다. 루틴은 이 파일을 수정하지 않는다. 새 코디를 짤 때 저장된 조합의 색·아이템 구성을 취향 참고로 삼되 그대로 반복하지는 않는다.

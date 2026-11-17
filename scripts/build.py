@@ -224,6 +224,7 @@ def render(d, history, prefix):
 <style>{CSS}</style></head><body><div class="wrap">
 <header><span class="eyebrow">ACLOSET 옷장 기반 · 매일 저녁 8시 업데이트</span><h1>{e(fmt_date(d['date'], d['weekday']))} 코디</h1></header>
 <a class="navlink" href="{prefix}style.html">내 스타일 리포트 · 트렌드 · 쇼핑 리스트 →</a>
+<a class="navlink" href="{prefix}favorites.html">저장한 코디 →</a>
 <div class="ribbon"><span class="chip">{e(w['place'])} · {e(w['summary'])}</span><span class="chip">기온 <b>{w['low']}° / {w['high']}°</b></span>
 <span class="chip rain">강수확률 <b>{w['rain']}%</b></span><span class="chip tpo">{e(d['tpo']['label'])}</span></div>
 <p class="note">{e(w.get('note'))} {e(d['tpo'].get('source'))}</p>
@@ -356,6 +357,41 @@ def build_style():
     (DOCS / "style.html").write_text(render_style(r), encoding="utf-8")
 
 
+def build_favorites():
+    f = ROOT / "favorites.json"
+    favs = json.loads(f.read_text(encoding="utf-8")) if f.exists() else []
+    (DOCS / "fav").mkdir(parents=True, exist_ok=True)
+    (DOCS / "items").mkdir(parents=True, exist_ok=True)
+    cards = ""
+    for v in reversed(favs):
+        img = DOCS / "fav" / f"{v['id']}.jpg"
+        if not img.exists():
+            compose([it["id"] for it in v["items"]], img)
+        rows = ""
+        for it in v["items"]:
+            c = CLOSET[it["id"]]
+            dst = DOCS / "items" / f"{c['id']}.jpg"
+            if not dst.exists():
+                dst.write_bytes((ITEMS / f"{c['id']}.jpg").read_bytes())
+            rows += (f'<li><img class="thumb" src="items/{c["id"]}.jpg" alt="" loading="lazy"><div>'
+                     f'<span class="part">{e(c.get("acloset_cat") or PART[c["cat"]])}</span><strong>{e(c["name"])}</strong></div></li>')
+        cards += (f'<article class="outfit main"><figure><img src="fav/{v["id"]}.jpg" alt="{e(v["title"])} 코디" loading="lazy"></figure>'
+                  f'<div class="desc"><div class="otitle"><span class="badge">저장</span><h3>{e(v["title"])}</h3></div>'
+                  f'<p class="note">{e(fmt_date(v["date"], v["weekday"]))} · {e(v.get("weather"))} · {e(v.get("tpo"))}</p>'
+                  f'<p class="why">{e(v["why"])}</p><ul class="items">{rows}</ul></div></article>')
+    if not cards:
+        cards = '<p class="note">아직 저장한 코디가 없어요.</p>'
+    (DOCS / "favorites.html").write_text(f"""<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>저장한 코디</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>{CSS}</style></head><body><div class="wrap">
+<header><span class="eyebrow">마음에 들어서 저장한 코디</span><h1>저장한 코디</h1></header>
+<a class="navlink" href="./">← 내일의 코디</a>
+<div id="outfits">{cards}</div>
+<footer>사진은 Acloset에 등록한 내 옷이에요.</footer></div></body></html>""", encoding="utf-8")
+
+
 def build():
     days = load_days()
     if not days:
@@ -377,6 +413,7 @@ def build():
         (DOCS / "archive" / f"{d['date']}.html").write_text(render(d, [], "../"), encoding="utf-8")
     (DOCS / "index.html").write_text(render(days[0], days[1:13], ""), encoding="utf-8")
     build_style()
+    build_favorites()
     (DOCS / ".nojekyll").write_text("")
     print("built", days[0]["date"])
 
