@@ -1,0 +1,73 @@
+{
+ "date": "2026-11-20",
+ "weekday": "금",
+ "weather": {
+  "place": "서울",
+  "low": -4,
+  "high": 1,
+  "rain": 0,
+  "summary": "대체로 맑음",
+  "note": "최저 -4°, 최고 1°예요."
+ },
+ "tpo": {
+  "label": "평일 출근",
+  "source": "오늘은 자동 백업 추천이에요. 일정은 반영되지 않았어요."
+ },
+ "outfits": [
+  {
+   "pick": true,
+   "title": "노이어 블루 셔츠 + PRADA 블랙 숏 패딩",
+   "why": "무채색 위주에 포인트 컬러는 하나까지만 쓰는 기준으로 날씨에 맞춰 골랐어요.",
+   "items": [
+    {
+     "id": "top-058",
+     "note": ""
+    },
+    {
+     "id": "outer-007",
+     "note": ""
+    },
+    {
+     "id": "bottom-049",
+     "note": ""
+    },
+    {
+     "id": "shoes-027",
+     "note": ""
+    },
+    {
+     "id": "acc-002",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "pick": false,
+   "title": "ART IF ACTS 차콜 셔츠 + PRADA 블랙 숏 패딩",
+   "why": "같은 기준의 다른 조합이에요.",
+   "items": [
+    {
+     "id": "top-042",
+     "note": ""
+    },
+    {
+     "id": "outer-007",
+     "note": ""
+    },
+    {
+     "id": "bottom-017",
+     "note": ""
+    },
+    {
+     "id": "shoes-014",
+     "note": ""
+    },
+    {
+     "id": "acc-001",
+     "note": ""
+    }
+   ]
+  }
+ ],
+ "refs": []
+}
