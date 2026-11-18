@@ -1593,7 +1593,8 @@
   "warmth": 2,
   "desc": "블랙 조거 트랙팬츠",
   "brand": "JUNNE",
-  "acloset_cat": "트레이닝 바지"
+  "acloset_cat": "트레이닝 바지",
+  "exclude": "sport"
  },
  {
   "id": "bottom-009",
@@ -1671,7 +1672,8 @@
   "warmth": 2,
   "desc": "블랙 와이드 트랙팬츠",
   "brand": "JUUN.J",
-  "acloset_cat": "트레이닝 바지"
+  "acloset_cat": "트레이닝 바지",
+  "exclude": "sport"
  },
  {
   "id": "bottom-015",
@@ -1711,7 +1713,8 @@
   "warmth": 2,
   "desc": "블랙 스웻팬츠",
   "brand": "ADER ERROR",
-  "acloset_cat": "트레이닝 바지"
+  "acloset_cat": "트레이닝 바지",
+  "exclude": "sport"
  },
  {
   "id": "bottom-018",
@@ -2135,7 +2138,8 @@
   "warmth": 2,
   "desc": "워시드 그레이 트랙 와이드 팬츠",
   "brand": "JUUN.J",
-  "acloset_cat": "트레이닝 바지"
+  "acloset_cat": "트레이닝 바지",
+  "exclude": "sport"
  },
  {
   "id": "bottom-050",
@@ -2239,7 +2243,8 @@
   "warmth": 2,
   "desc": "레드 트랙팬츠",
   "brand": "HONDA",
-  "acloset_cat": "트레이닝 바지"
+  "acloset_cat": "트레이닝 바지",
+  "exclude": "sport"
  },
  {
   "id": "outer-001",
@@ -2370,7 +2375,8 @@
   "warmth": 1,
   "desc": "블랙 트랙 재킷",
   "brand": "PUMA",
-  "acloset_cat": "재킷"
+  "acloset_cat": "재킷",
+  "exclude": "sport"
  },
  {
   "id": "outer-011",
@@ -2397,7 +2403,8 @@
   "warmth": 1,
   "desc": "그레이 트랙 집업",
   "brand": "SKULLPIG",
-  "acloset_cat": "재킷"
+  "acloset_cat": "재킷",
+  "exclude": "sport"
  },
  {
   "id": "outer-013",
@@ -3062,7 +3069,8 @@
   "warmth": 1,
   "desc": "블랙 3선 트랙 재킷",
   "brand": "아디다스",
-  "acloset_cat": "재킷"
+  "acloset_cat": "재킷",
+  "exclude": "sport"
  },
  {
   "id": "shoes-001",

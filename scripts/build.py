@@ -162,6 +162,9 @@ section { display:flex; flex-direction:column; gap:10px; }
 .switch button:disabled { opacity:.35; cursor:default; }
 .switch button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
 .switch .count { font-family:var(--mono); font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.save { font:inherit; font-size:14px; font-weight:500; padding:10px 16px; min-height:44px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--fg); cursor:pointer; margin-top:12px; }
+.save:hover, .save:focus-visible { border-color:var(--accent); color:var(--accent); }
+.save[aria-pressed="true"] { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
 .js .outfit[hidden] { display:none; }
 .badge.auto { background:transparent; color:var(--accent); border:1px solid var(--accent); }
 footer { font-size:12px; color:var(--muted); }
@@ -184,6 +187,24 @@ JS = """
 })();
 """
 
+SAVE_JS = r"""
+(function(){
+  var KEY='savedOutfits';
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY))||[]; }catch(e){ return []; } }
+  function store(a){ try{ localStorage.setItem(KEY, JSON.stringify(a)); return true; }catch(e){ return false; } }
+  function paint(b,on){ b.setAttribute('aria-pressed', on?'true':'false'); b.textContent = on?'저장됨 · 누르면 취소':'이 코디 저장'; }
+  [].forEach.call(document.querySelectorAll('button.save'), function(b){
+    var v=JSON.parse(b.getAttribute('data-fav'));
+    paint(b, load().some(function(x){ return x.id===v.id; }));
+    b.addEventListener('click', function(){
+      var a=load(), on=a.some(function(x){ return x.id===v.id; });
+      if(on){ a=a.filter(function(x){ return x.id!==v.id; }); } else { v.saved=Date.now(); a.push(v); }
+      if(store(a)) paint(b,!on); else b.textContent='이 브라우저에서는 저장할 수 없어요';
+    });
+  });
+})();
+"""
+
 
 def outfit_block(d, o, idx, prefix):
     rows = ""
@@ -195,9 +216,14 @@ def outfit_block(d, o, idx, prefix):
     badge = ('<span class="badge">추천</span>' if o.get("pick") else
              '<span class="badge auto">옷장 자동 조합</span>' if o.get("auto") else '<span class="badge alt">대안</span>')
     hidden = " hidden" if idx else ""
+    fav = json.dumps({"id": f'{d["date"]}-{idx + 1}', "when": fmt_date(d["date"], d["weekday"]), "title": o["title"], "why": o["why"],
+                      "img": f'img/{d["date"]}-{idx + 1}.jpg',
+                      "items": [{"id": it["id"], "name": CLOSET[it["id"]]["name"],
+                                 "part": CLOSET[it["id"]].get("acloset_cat") or PART[CLOSET[it["id"]]["cat"]]} for it in o["items"]]},
+                     ensure_ascii=False)
     return (f'<article class="outfit main" data-i="{idx}"{hidden}><figure><img src="{prefix}img/{d["date"]}-{idx + 1}.jpg" alt="{e(o["title"])} 코디" loading="lazy"></figure>'
             f'<div class="desc"><div class="otitle">{badge}<h3>{e(o["title"])}</h3></div><p class="why">{e(o["why"])}</p>'
-            f'<ul class="items">{rows}</ul></div></article>')
+            f'<ul class="items">{rows}</ul><button type="button" class="save" data-fav="{e(fav)}">이 코디 저장</button></div></article>')
 
 
 def render(d, history, prefix):
@@ -356,6 +382,31 @@ def build_style():
             dst.write_bytes((ITEMS / f"{i}.jpg").read_bytes())
     (DOCS / "style.html").write_text(render_style(r), encoding="utf-8")
 
+FAV_JS = r"""
+(function(){
+  var KEY='savedOutfits', box=document.getElementById('mine');
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY))||[]; }catch(e){ return []; } }
+  function el(t,c,txt){ var n=document.createElement(t); if(c) n.className=c; if(txt!=null) n.textContent=txt; return n; }
+  function draw(){
+    var a=load().slice().reverse(); box.textContent='';
+    if(!a.length){ box.appendChild(el('p','note','코디 화면에서 "이 코디 저장"을 누르면 여기에 모여요.')); return; }
+    a.forEach(function(v){
+      var art=el('article','outfit main'), fig=el('figure'), img=el('img'); img.src=v.img; img.alt=v.title+' 코디'; img.loading='lazy'; fig.appendChild(img);
+      var d=el('div','desc'), t=el('div','otitle'); t.appendChild(el('span','badge','저장')); t.appendChild(el('h3',null,v.title)); d.appendChild(t);
+      d.appendChild(el('p','note',v.when)); d.appendChild(el('p','why',v.why));
+      var ul=el('ul','items');
+      v.items.forEach(function(it){ var li=el('li'), th=el('img','thumb'); th.src='items/'+it.id+'.jpg'; th.alt=''; th.loading='lazy';
+        var w=el('div'); w.appendChild(el('span','part',it.part)); w.appendChild(el('strong',null,it.name)); li.appendChild(th); li.appendChild(w); ul.appendChild(li); });
+      d.appendChild(ul);
+      var b=el('button','save','저장 취소'); b.type='button';
+      b.addEventListener('click', function(){ try{ localStorage.setItem(KEY, JSON.stringify(load().filter(function(x){ return x.id!==v.id; }))); }catch(e){} draw(); });
+      d.appendChild(b); art.appendChild(fig); art.appendChild(d); box.appendChild(art);
+    });
+  }
+  draw();
+})();
+"""
+
 
 def build_favorites():
     f = ROOT / "favorites.json"
@@ -388,8 +439,9 @@ def build_favorites():
 <style>{CSS}</style></head><body><div class="wrap">
 <header><span class="eyebrow">마음에 들어서 저장한 코디</span><h1>저장한 코디</h1></header>
 <a class="navlink" href="./">← 내일의 코디</a>
-<div id="outfits">{cards}</div>
-<footer>사진은 Acloset에 등록한 내 옷이에요.</footer></div></body></html>""", encoding="utf-8")
+<section><h2>버튼으로 저장한 코디</h2><p class="note">이 기기의 이 브라우저에만 저장돼요.</p><div id="mine"></div></section>
+<section><h2>따로 보관한 코디</h2><div id="outfits">{cards}</div></section>
+<footer>사진은 Acloset에 등록한 내 옷이에요.</footer></div><script>{FAV_JS}</script></body></html>""", encoding="utf-8")
 
 
 def build():
