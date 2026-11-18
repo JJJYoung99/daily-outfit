@@ -3,71 +3,59 @@
  "weekday": "목",
  "weather": {
   "place": "서울",
-  "low": -2,
-  "high": 5,
-  "rain": 2,
-  "summary": "대체로 맑음",
-  "note": "최저 -2°, 최고 5°예요."
+  "summary": "구름많고 한파",
+  "low": -1,
+  "high": 4,
+  "rain": 20,
+  "note": "아침 영하 1°, 낮에도 4°에 그치는 올가을 첫 한파예요. 두꺼운 니트에 울 코트나 패딩을 꼭 입고, 밤사이 내린 비가 얼 수 있으니 밑창이 단단한 신발이 좋아요."
  },
  "tpo": {
-  "label": "평일 출근",
-  "source": "오늘은 자동 백업 추천이에요. 일정은 반영되지 않았어요."
+  "label": "근무",
+  "source": "캘린더에 접근할 수 없어 평일 기준인 근무로 봤어요."
  },
  "outfits": [
   {
    "pick": true,
-   "title": "ZAVANAS 화이트 긴팔 티 + PRADA 블랙 숏 패딩",
-   "why": "무채색 위주에 포인트 컬러는 하나까지만 쓰는 기준으로 날씨에 맞춰 골랐어요.",
+   "title": "TONYWACK 블랙 케이블 니트 + RECTO 그레이 헤링본 코트",
+   "why": "올겨울 코트는 장식을 덜어낸 90년대 미니멀 실루엣이 중심이라, 블랙 니트·블랙 슬랙스 위에 RECTO 그레이 헤링본 코트 하나만 걸쳐 그레이와 블랙 두 톤으로 정리했어요. 올블랙이 딱딱해 보일 땐 색 대신 소재 결을 바꾸라는 조언대로 케이블 짜임과 헤링본 조직으로 변화를 줬어요. 영하 날씨에 맞는 가장 따뜻한 조합이고, 근무 중엔 코트만 벗으면 돼요.",
    "items": [
-    {
-     "id": "top-080",
-     "note": ""
-    },
-    {
-     "id": "outer-007",
-     "note": ""
-    },
-    {
-     "id": "bottom-052",
-     "note": ""
-    },
-    {
-     "id": "shoes-011",
-     "note": ""
-    },
-    {
-     "id": "acc-002",
-     "note": ""
-    }
+    {"id": "outer-024", "note": "RECTO 그레이 헤링본 코트는 올블랙 위에 얹는 유일한 밝은 톤이에요. 단추를 잠그고 입으세요."},
+    {"id": "top-020", "note": "TONYWACK 블랙 케이블 니트는 도톰해서 코트 안에 이것 하나로 충분해요."},
+    {"id": "bottom-055", "note": "쿠어 블랙 투턱 정장바지로 니트와 색을 이어 다리가 길어 보이게 해요."},
+    {"id": "shoes-024", "note": "ROMANTIC MOVE 블랙 첼시 부츠는 발목을 덮어 따뜻하고 살얼음 길에도 안정적이에요."},
+    {"id": "acc-003", "note": "르메르 블랙 호보 숄더백을 코트 위에 메면 돼요."}
    ]
   },
   {
    "pick": false,
-   "title": "WAVINESS 그레이 스트라이프 셔츠 + K2 차콜 후드 패딩",
-   "why": "같은 기준의 다른 조합이에요.",
+   "title": "포인트 하나: POTTERY 블루그레이 셔츠 + ART IF ACTS 블랙 브이넥 니트 + RECTO 블랙 발마칸 코트",
+   "why": "결국 다시 블랙 롱 코트라는 흐름을 따라 RECTO 블랙 발마칸 코트를 주인공으로 삼았어요. 브이넥 사이로 보이는 POTTERY 블루그레이 셔츠 깃이 이 코디의 유일한 포인트 컬러예요. 셔츠와 니트를 겹쳐 실내에서 온도 조절이 쉬워요.",
    "items": [
-    {
-     "id": "top-054",
-     "note": ""
-    },
-    {
-     "id": "outer-019",
-     "note": ""
-    },
-    {
-     "id": "bottom-014",
-     "note": ""
-    },
-    {
-     "id": "shoes-001",
-     "note": ""
-    },
-    {
-     "id": "acc-002",
-     "note": ""
-    }
+    {"id": "outer-026", "note": "RECTO 블랙 발마칸 코트는 품이 넉넉해 셔츠와 니트를 겹쳐 입어도 편해요."},
+    {"id": "top-036", "note": "POTTERY 블루그레이 셔츠는 깃과 소매 끝만 살짝 보이게 입어요."},
+    {"id": "top-033", "note": "ART IF ACTS 블랙 브이넥 니트를 셔츠 위에 겹쳐요."},
+    {"id": "bottom-032", "note": "어나더 오피스 차콜 와이드 긴바지로 블랙 코트 아래 톤을 한 단계 풀어줘요."},
+    {"id": "shoes-022", "note": "DR. MARTENS 블랙 레더 구두는 밑창이 두꺼워 찬 바닥에 좋아요."},
+    {"id": "acc-001", "note": "생로랑 블랙 나일론 크로스백."}
+   ]
+  },
+  {
+   "pick": false,
+   "title": "편하게: 더니트컴퍼니 라이트그레이 니트 + TIME HOMME 블랙 숏 패딩",
+   "why": "코트보다 가볍고 따뜻한 걸 원할 때의 조합이에요. TIME HOMME 블랙 숏 패딩은 광택이 적고 단정해서 출근길에도 어색하지 않고, 라이트그레이 니트와 차콜 데님으로 블랙에서 그레이까지 톤만 바꿨어요.",
+   "items": [
+    {"id": "outer-022", "note": "TIME HOMME 블랙 숏 패딩은 바람이 강한 아침에 지퍼를 끝까지 올려요."},
+    {"id": "top-004", "note": "더니트컴퍼니 라이트그레이 니트가 블랙 패딩 안에서 얼굴을 밝혀줘요. 얇은 이너를 하나 받쳐 입으세요."},
+    {"id": "bottom-021", "note": "ART IF ACTS 차콜 벌룬 청바지는 숏 패딩과 길이 균형이 좋아요."},
+    {"id": "shoes-004", "note": "클락스 오리지널스 블랙 스웨이드 구두. 젖은 길은 피해서 걸어요."},
+    {"id": "acc-001", "note": "생로랑 블랙 나일론 크로스백."}
    ]
   }
  ],
- "refs": []
+ "refs": [
+  {"label": "보그 코리아 · 돌고 돌아 결국 다시 '블랙 롱 코트'입니다", "url": "https://www.vogue.co.kr/2026/10/27/%eb%8f%8c%ea%b3%a0-%eb%8f%8c%ec%95%84-%ea%b2%b0%ea%b5%ad-%eb%8b%a4%ec%8b%9c-%eb%b8%94%eb%9e%99-%eb%a1%b1-%ec%bd%94%ed%8a%b8%ec%9e%85%eb%8b%88%eb%8b%a4/"},
+  {"label": "W 코리아 · 블랙, 그레이, 브라운 올겨울 롱 코트는 무슨 색으로 입을까", "url": "https://www.wkorea.com/2025/12/05/%eb%b8%94%eb%9e%99-%ea%b7%b8%eb%a0%88%ec%9d%b4-%eb%b8%8c%eb%9d%bc%ec%9a%b4-%ec%98%ac%ea%b2%a8%ec%9a%b8-%eb%a1%b1-%ec%bd%94%ed%8a%b8%eb%8a%94-%eb%ac%b4%ec%8a%a8-%ec%83%89%ec%9c%bc%eb%a1%9c-%ec%9e%85/"},
+  {"label": "The VOU · Black Monochrome Outfit Ideas for Men", "url": "https://thevou.com/blog/black-monochrome-outfit-ideas-men"},
+  {"label": "SANVT · All Black Everything: Monochrome Styles in Winter", "url": "https://sanvt.com/blogs/journal/all-black-everything-monochrome-styles-in-winter"}
+ ]
 }
