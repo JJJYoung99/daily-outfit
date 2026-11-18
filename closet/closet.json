@@ -852,7 +852,8 @@
   "warmth": 1,
   "desc": "그레이 깅엄 셔츠",
   "brand": "H&M",
-  "acloset_cat": "셔츠"
+  "acloset_cat": "셔츠",
+  "low_priority": true
  },
  {
   "id": "top-066",
@@ -3120,7 +3121,8 @@
   "rain_ok": false,
   "desc": "블랙 스웨이드 데저트 슈즈",
   "brand": "클락스 오리지널스",
-  "acloset_cat": "구두"
+  "acloset_cat": "구두",
+  "work_low": true
  },
  {
   "id": "shoes-005",
@@ -3156,7 +3158,8 @@
   "rain_ok": false,
   "desc": "화이트블루 테니스화",
   "brand": "ASICS",
-  "acloset_cat": "운동화"
+  "acloset_cat": "운동화",
+  "work_low": true
  },
  {
   "id": "shoes-008",
@@ -3168,7 +3171,8 @@
   "rain_ok": true,
   "desc": "블랙 트레일 러닝화",
   "brand": "SALOMON",
-  "acloset_cat": "운동화"
+  "acloset_cat": "운동화",
+  "work_low": true
  },
  {
   "id": "shoes-009",
@@ -3180,7 +3184,8 @@
   "rain_ok": false,
   "desc": "블랙 러닝화",
   "brand": "BROOKS",
-  "acloset_cat": "운동화"
+  "acloset_cat": "운동화",
+  "work_low": true
  },
  {
   "id": "shoes-010",
@@ -3192,7 +3197,8 @@
   "rain_ok": false,
   "desc": "그레이 트레이닝화",
   "brand": "NIKE",
-  "acloset_cat": "운동화"
+  "acloset_cat": "운동화",
+  "work_low": true
  },
  {
   "id": "shoes-011",
@@ -3209,14 +3215,15 @@
  {
   "id": "shoes-012",
   "cat": "shoes",
-  "name": "ADIDAS 화이트 스니커즈",
+  "name": "ADIDAS 화이트 테니스화",
   "sub": "sneaker",
   "color": "white",
   "formal": 1,
   "rain_ok": true,
-  "desc": "화이트 삼바 스니커즈",
+  "desc": "테니스화 (코디에서 제외)",
   "brand": "ADIDAS",
-  "acloset_cat": "스니커즈"
+  "acloset_cat": "스니커즈",
+  "exclude": "sport"
  },
  {
   "id": "shoes-013",
@@ -3264,7 +3271,8 @@
   "rain_ok": true,
   "desc": "블랙 윙팁 더비",
   "brand": "STCO",
-  "acloset_cat": "구두"
+  "acloset_cat": "구두",
+  "work_low": true
  },
  {
   "id": "shoes-017",
@@ -3276,7 +3284,8 @@
   "rain_ok": true,
   "desc": "블랙 캡토 옥스퍼드 (Loake)",
   "brand": "Loake",
-  "acloset_cat": "구두"
+  "acloset_cat": "구두",
+  "work_low": true
  },
  {
   "id": "shoes-018",
@@ -3312,7 +3321,8 @@
   "rain_ok": false,
   "desc": "그레이 러닝화 (Hoka)",
   "brand": "Hoka",
-  "acloset_cat": "운동화"
+  "acloset_cat": "운동화",
+  "work_low": true
  },
  {
   "id": "shoes-021",
@@ -3336,7 +3346,8 @@
   "rain_ok": true,
   "desc": "블랙 레더 더비",
   "brand": "DR. MARTENS",
-  "acloset_cat": "구두"
+  "acloset_cat": "구두",
+  "work_low": true
  },
  {
   "id": "shoes-023",

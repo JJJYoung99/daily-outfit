@@ -15,10 +15,11 @@ USED, _ = history()
 TIER_W = {"premium": 2.0, "designer": 1.8, "core": 1.4, "basic": 0.6}
 
 
-def weighted(rnd, items):
+def weighted(rnd, items, work=False):
     """좋아하는 브랜드·안 입은 옷일수록 잘 뽑히게: 브랜드 가중치 × 사용 횟수 역수."""
     ws = [TIER_W[tier(i)] * (3.0 if USED[i["id"]] == 0 else 1.0 / (1 + USED[i["id"]]))
-          * (0.15 if i.get("comfort") == "low" else 1.0) for i in items]
+          * (0.15 if i.get("comfort") == "low" else 1.0) * (0.15 if i.get("low_priority") else 1.0)
+          * (0.15 if work and i.get("work_low") else 1.0) for i in items]
     return rnd.choices(items, weights=ws)[0]
 NEUTRAL = {"black", "white", "gray", "lightgray", "charcoal", "ivory", "silver"}
 WEEK = "월화수목금토일"
@@ -59,7 +60,7 @@ def pick(w, weekday, seed, formal=None, avoid=()):
     shoes = by("shoes", lambda i: i["sub"] not in ("sport", "sandal") and (i["rain_ok"] or not rainy) and abs(i.get("formal", 2) - formal) <= 1)
     bags = by("acc", lambda i: i["sub"] == "bag" and abs(i.get("formal", 2) - formal) <= 1) or by("acc", lambda i: i["sub"] == "bag")
     for _ in range(400):
-        combo = [weighted(rnd, tops), weighted(rnd, bottoms), weighted(rnd, shoes)]
+        combo = [weighted(rnd, tops), weighted(rnd, bottoms), weighted(rnd, shoes, work=weekday < 5)]
         if outers:
             combo.insert(1, weighted(rnd, outers))
         subs = {i["sub"] for i in combo}
