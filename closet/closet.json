@@ -1479,6 +1479,19 @@
   "acloset_cat": "반팔 셔츠"
  },
  {
+  "id": "top-114",
+  "cat": "top",
+  "name": "더니트컴퍼니 크림 캐시미어 모크넥 니트",
+  "sub": "knit",
+  "color": "cream",
+  "formal": 2,
+  "sleeve": "l",
+  "warmth": 3,
+  "desc": "크림 캐시미어 100% 모크넥 니트 (XXL). 립이 얇은 미니멀 하이넥, 블레이저·코트 이너로 좋음",
+  "brand": "더니트컴퍼니",
+  "acloset_cat": "니트"
+ },
+ {
   "id": "bottom-001",
   "cat": "bottom",
   "name": "그라미치 베이지 와이드 긴바지",
