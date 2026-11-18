@@ -256,7 +256,7 @@ def render(d, history, prefix):
 <p class="note">{e(w.get('note'))} {e(d['tpo'].get('source'))}</p>
 {switch}<div id="outfits">{blocks}</div>{refs}{hist}
 <footer>사진은 Acloset에 등록한 내 옷이에요.</footer></div>
-<script>{JS}</script></body></html>"""
+<script>{JS}</script><script>{SAVE_JS}</script></body></html>"""
 
 
 NEUTRAL = {"black", "white", "gray", "lightgray", "charcoal", "ivory", "silver"}

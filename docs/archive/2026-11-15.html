@@ -92,4 +92,20 @@ footer { font-size:12px; color:var(--muted); }
   next.addEventListener('click', function(){ show(i+1); cards[i].scrollIntoView({block:'nearest', behavior:'smooth'}); });
   prev.addEventListener('click', function(){ if(i>0){ show(i-1); cards[i].scrollIntoView({block:'nearest', behavior:'smooth'}); } });
 })();
+</script><script>
+(function(){
+  var KEY='savedOutfits';
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY))||[]; }catch(e){ return []; } }
+  function store(a){ try{ localStorage.setItem(KEY, JSON.stringify(a)); return true; }catch(e){ return false; } }
+  function paint(b,on){ b.setAttribute('aria-pressed', on?'true':'false'); b.textContent = on?'저장됨 · 누르면 취소':'이 코디 저장'; }
+  [].forEach.call(document.querySelectorAll('button.save'), function(b){
+    var v=JSON.parse(b.getAttribute('data-fav'));
+    paint(b, load().some(function(x){ return x.id===v.id; }));
+    b.addEventListener('click', function(){
+      var a=load(), on=a.some(function(x){ return x.id===v.id; });
+      if(on){ a=a.filter(function(x){ return x.id!==v.id; }); } else { v.saved=Date.now(); a.push(v); }
+      if(store(a)) paint(b,!on); else b.textContent='이 브라우저에서는 저장할 수 없어요';
+    });
+  });
+})();
 </script></body></html>
