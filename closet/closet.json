@@ -3109,7 +3109,8 @@
   "brand": "투스페이스",
   "acloset_cat": "스니커즈",
   "comfort": "low",
-  "note_user": "크고 불편함(평발). 깔창 넣기 전엔 거의 추천 안 함"
+  "note_user": "크고 불편함(평발). 깔창 넣기 전엔 거의 추천 안 함",
+  "work_low": true
  },
  {
   "id": "shoes-004",
@@ -3146,7 +3147,8 @@
   "rain_ok": false,
   "desc": "그레이 청키 러닝화",
   "brand": "BALENCIAGA",
-  "acloset_cat": "스니커즈"
+  "acloset_cat": "스니커즈",
+  "work_low": true
  },
  {
   "id": "shoes-007",
@@ -3215,15 +3217,14 @@
  {
   "id": "shoes-012",
   "cat": "shoes",
-  "name": "ADIDAS 화이트 테니스화",
+  "name": "ADIDAS 화이트 스니커즈",
   "sub": "sneaker",
   "color": "white",
   "formal": 1,
   "rain_ok": true,
-  "desc": "테니스화 (코디에서 제외)",
+  "desc": "화이트 삼바 스니커즈",
   "brand": "ADIDAS",
-  "acloset_cat": "스니커즈",
-  "exclude": "sport"
+  "acloset_cat": "스니커즈"
  },
  {
   "id": "shoes-013",
@@ -3327,14 +3328,15 @@
  {
   "id": "shoes-021",
   "cat": "shoes",
-  "name": "ADIDAS 화이트 니트 스니커즈",
+  "name": "ADIDAS 화이트 니트 테니스화",
   "sub": "sneaker",
   "color": "white",
   "formal": 1,
   "rain_ok": false,
-  "desc": "화이트 니트 스니커즈",
+  "desc": "테니스화 (코디에서 제외)",
   "brand": "ADIDAS",
-  "acloset_cat": "스니커즈"
+  "acloset_cat": "스니커즈",
+  "exclude": "sport"
  },
  {
   "id": "shoes-022",
@@ -3407,7 +3409,8 @@
   "rain_ok": false,
   "desc": "실버그레이 청키 스니커즈",
   "brand": "발렌시아가",
-  "acloset_cat": "스니커즈"
+  "acloset_cat": "스니커즈",
+  "work_low": true
  },
  {
   "id": "shoes-028",
