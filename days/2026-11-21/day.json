@@ -1,0 +1,73 @@
+{
+ "date": "2026-11-21",
+ "weekday": "토",
+ "weather": {
+  "place": "서울",
+  "low": -5,
+  "high": 0,
+  "rain": 0,
+  "summary": "대체로 맑음",
+  "note": "최저 -5°, 최고 0°예요."
+ },
+ "tpo": {
+  "label": "휴일 외출",
+  "source": "오늘은 자동 백업 추천이에요. 일정은 반영되지 않았어요."
+ },
+ "outfits": [
+  {
+   "pick": true,
+   "title": "ZAVANAS 블랙 긴팔 티 + NOIR LARMES 브라운 무스탕",
+   "why": "무채색 위주에 포인트 컬러는 하나까지만 쓰는 기준으로 날씨에 맞춰 골랐어요.",
+   "items": [
+    {
+     "id": "top-093",
+     "note": ""
+    },
+    {
+     "id": "outer-029",
+     "note": ""
+    },
+    {
+     "id": "bottom-039",
+     "note": ""
+    },
+    {
+     "id": "shoes-006",
+     "note": ""
+    },
+    {
+     "id": "acc-003",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "pick": false,
+   "title": "노이어 차콜 셔츠 + DISCOVERY 블랙 롱 패딩",
+   "why": "같은 기준의 다른 조합이에요.",
+   "items": [
+    {
+     "id": "top-111",
+     "note": ""
+    },
+    {
+     "id": "outer-020",
+     "note": ""
+    },
+    {
+     "id": "bottom-026",
+     "note": ""
+    },
+    {
+     "id": "shoes-015",
+     "note": ""
+    },
+    {
+     "id": "acc-002",
+     "note": ""
+    }
+   ]
+  }
+ ],
+ "refs": []
+}

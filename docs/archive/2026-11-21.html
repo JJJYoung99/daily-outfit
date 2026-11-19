@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>내일의 코디</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root { --bg:#f3f4f2; --surface:#fff; --fg:#1d201f; --muted:#6a706d; --line:#dfe2df; --accent:#3d5a6c; --accent-soft:#e3eaee; --rain:#2f6f9f;
+  --sans:"IBM Plex Sans KR","Apple SD Gothic Neo",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace; color-scheme:light; }
+@media (prefers-color-scheme: dark) { :root { --bg:#151817; --surface:#1e2221; --fg:#e8ebe9; --muted:#9aa19e; --line:#2e3432; --accent:#9cbccf; --accent-soft:#24313a; --rain:#7fb6e0; color-scheme:dark; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:15px; line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); padding-block:28px 48px; }
+a { color:inherit; }
+.wrap { max-width:980px; margin:0 auto; display:flex; flex-direction:column; gap:28px; }
+header { display:flex; flex-direction:column; gap:6px; }
+.eyebrow { font-size:12px; letter-spacing:.08em; color:var(--muted); }
+h1 { font-size:clamp(26px,5vw,36px); line-height:1.2; margin:0; text-wrap:balance; }
+h2 { font-size:15px; margin:0; color:var(--muted); font-weight:500; letter-spacing:.04em; }
+.ribbon { display:flex; flex-wrap:wrap; gap:8px; }
+.chip { display:inline-flex; gap:6px; align-items:baseline; padding:6px 12px; border-radius:999px; background:var(--surface); border:1px solid var(--line); font-size:13px; }
+.chip b { font-family:var(--mono); font-weight:500; font-variant-numeric:tabular-nums; }
+.chip.rain b { color:var(--rain); }
+.chip.tpo { background:var(--accent-soft); border-color:transparent; color:var(--accent); font-weight:500; }
+.note { margin:0; color:var(--muted); max-width:65ch; }
+.outfit { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:24px; align-items:start; }
+.outfit.main { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:20px; }
+.outfit.sub { grid-template-columns:minmax(0,220px) minmax(0,1fr); padding:0 4px; }
+figure { margin:0; }
+.outfit img { width:100%; aspect-ratio:1100/1300; object-fit:contain; border-radius:12px; background:#fff; display:block; }
+.desc { display:flex; flex-direction:column; gap:12px; min-width:0; }
+.otitle { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+h3 { margin:0; font-size:20px; line-height:1.3; }
+.sub h3 { font-size:17px; }
+.badge { font-size:12px; font-weight:700; padding:2px 10px; border-radius:999px; background:var(--accent); color:var(--bg); }
+.badge.alt { background:transparent; color:var(--muted); border:1px solid var(--line); }
+.why { margin:0; }
+.items { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+.items li { display:grid; grid-template-columns:76px minmax(0,1fr); gap:12px; padding:10px 0; border-top:1px solid var(--line); }
+.items li p { margin:2px 0 0; color:var(--muted); font-size:14px; }
+.items li:has(.thumb) { grid-template-columns:56px minmax(0,1fr); align-items:start; }
+.thumb { width:56px; height:56px; object-fit:contain; background:#fff; border-radius:8px; border:1px solid var(--line); display:block; }
+.items li .part { display:block; padding-top:0; }
+.items li strong { display:block; line-height:1.4; }
+.sub .thumb { width:40px; height:40px; }
+.sub .items li:has(.thumb) { grid-template-columns:40px minmax(0,1fr); }
+.part, .when { font-size:12px; letter-spacing:.04em; color:var(--muted); padding-top:2px; }
+.when { color:var(--accent); font-weight:500; }
+.sub .items li p { display:none; }
+.sub .items li { padding:6px 0; }
+section { display:flex; flex-direction:column; gap:10px; }
+.refs ul { margin:0; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:8px; }
+.refs a { display:inline-block; padding:6px 12px; border:1px solid var(--line); border-radius:999px; text-decoration:none; font-size:13px; background:var(--surface); }
+.refs a:hover, .refs a:focus-visible { border-color:var(--accent); color:var(--accent); }
+.strip { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:12px; }
+.strip a { text-decoration:none; }
+.strip img { width:100%; aspect-ratio:1100/1300; object-fit:contain; border-radius:10px; background:#fff; display:block; }
+.strip span { display:block; font-size:12px; color:var(--muted); margin-top:6px; line-height:1.4; }
+.navlink { display:inline-flex; align-items:center; gap:6px; padding:10px 16px; border-radius:999px; background:var(--surface); border:1px solid var(--line); text-decoration:none; font-weight:500; width:fit-content; }
+.navlink:hover, .navlink:focus-visible { border-color:var(--accent); color:var(--accent); }
+.switch { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.switch button { font:inherit; font-size:15px; font-weight:700; padding:12px 20px; border-radius:999px; border:0; background:var(--fg); color:var(--bg); cursor:pointer; min-height:44px; }
+.switch button.ghost { background:transparent; color:var(--fg); border:1px solid var(--line); font-weight:500; padding:12px 16px; }
+.switch button:disabled { opacity:.35; cursor:default; }
+.switch button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.switch .count { font-family:var(--mono); font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.save { font:inherit; font-size:14px; font-weight:500; padding:10px 16px; min-height:44px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--fg); cursor:pointer; margin-top:12px; }
+.save:hover, .save:focus-visible { border-color:var(--accent); color:var(--accent); }
+.save[aria-pressed="true"] { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
+.js .outfit[hidden] { display:none; }
+.badge.auto { background:transparent; color:var(--accent); border:1px solid var(--accent); }
+footer { font-size:12px; color:var(--muted); }
+@media (max-width:680px) { .outfit, .outfit.sub { grid-template-columns:minmax(0,1fr); } .outfit.main { padding:14px; } .sub figure { max-width:260px; } }
+</style></head><body><div class="wrap">
+<header><span class="eyebrow">ACLOSET 옷장 기반 · 매일 저녁 8시 업데이트</span><h1>11월 21일 (토) 코디</h1></header>
+<a class="navlink" href="../style.html">내 스타일 리포트 · 트렌드 · 쇼핑 리스트 →</a>
+<a class="navlink" href="../favorites.html">저장한 코디 →</a>
+<div class="ribbon"><span class="chip">서울 · 대체로 맑음</span><span class="chip">기온 <b>-5° / 0°</b></span>
+<span class="chip rain">강수확률 <b>0%</b></span><span class="chip tpo">휴일 외출</span></div>
+<p class="note">최저 -5°, 최고 0°예요. 오늘은 자동 백업 추천이에요. 일정은 반영되지 않았어요.</p>
+<div class="switch"><button type="button" class="ghost" id="prev" disabled>이전 코디</button><button type="button" id="next">다른 코디 추천</button><span class="count" id="count">1 / 6</span></div><div id="outfits"><article class="outfit main" data-i="0"><figure><img src="../img/2026-11-21-1.jpg" alt="ZAVANAS 블랙 긴팔 티 + NOIR LARMES 브라운 무스탕 코디" loading="lazy"></figure><div class="desc"><div class="otitle"><span class="badge">추천</span><h3>ZAVANAS 블랙 긴팔 티 + NOIR LARMES 브라운 무스탕</h3></div><p class="why">무채색 위주에 포인트 컬러는 하나까지만 쓰는 기준으로 날씨에 맞춰 골랐어요.</p><ul class="items"><li><img class="thumb" src="../items/top-093.jpg" alt="" loading="lazy"><div><span class="part">긴팔 티</span><strong>ZAVANAS 블랙 긴팔 티</strong></div></li><li><img class="thumb" src="../items/outer-029.jpg" alt="" loading="lazy"><div><span class="part">무스탕</span><strong>NOIR LARMES 브라운 무스탕</strong></div></li><li><img class="thumb" src="../items/bottom-039.jpg" alt="" loading="lazy"><div><span class="part">청바지</span><strong>ART IF ACTS 블랙 투턱 청바지</strong></div></li><li><img class="thumb" src="../items/shoes-006.jpg" alt="" loading="lazy"><div><span class="part">스니커즈</span><strong>BALENCIAGA 그레이 러닝 스니커즈</strong></div></li><li><img class="thumb" src="../items/acc-003.jpg" alt="" loading="lazy"><div><span class="part">숄더백</span><strong>르메르 블랙 호보 숄더백</strong></div></li></ul><button type="button" class="save" data-fav="{&quot;id&quot;: &quot;2026-11-21-1&quot;, &quot;when&quot;: &quot;11월 21일 (토)&quot;, &quot;title&quot;: &quot;ZAVANAS 블랙 긴팔 티 + NOIR LARMES 브라운 무스탕&quot;, &quot;why&quot;: &quot;무채색 위주에 포인트 컬러는 하나까지만 쓰는 기준으로 날씨에 맞춰 골랐어요.&quot;, &quot;img&quot;: &quot;img/2026-11-21-1.jpg&quot;, &quot;items&quot;: [{&quot;id&quot;: &quot;top-093&quot;, &quot;name&quot;: &quot;ZAVANAS 블랙 긴팔 티&quot;, &quot;part&quot;: &quot;긴팔 티&quot;}, {&quot;id&quot;: &quot;outer-029&quot;, &quot;name&quot;: &quot;NOIR LARMES 브라운 무스탕&quot;, &quot;part&quot;: &quot;무스탕&quot;}, {&quot;id&quot;: &quot;bottom-039&quot;, &quot;name&quot;: &quot;ART IF ACTS 블랙 투턱 청바지&quot;, &quot;part&quot;: &quot;청바지&quot;}, {&quot;id&quot;: &quot;shoes-006&quot;, &quot;name&quot;: &quot;BALENCIAGA 그레이 러닝 스니커즈&quot;, &quot;part&quot;: &quot;스니커즈&quot;}, {&quot;id&quot;: &quot;acc-003&quot;, &quot;name&quot;: &quot;르메르 블랙 호보 숄더백&quot;, &quot;part&quot;: &quot;숄더백&quot;}]}">이 코디 저장</button></div></article><article class="outfit main" data-i="1" hidden><figure><img src="../img/2026-11-21-2.jpg" alt="노이어 차콜 셔츠 + DISCOVERY 블랙 롱 패딩 코디" loading="lazy"></figure><div class="desc"><div class="otitle"><span class="badge alt">대안</span><h3>노이어 차콜 셔츠 + DISCOVERY 블랙 롱 패딩</h3></div><p class="why">같은 기준의 다른 조합이에요.</p><ul class="items"><li><img class="thumb" src="../items/top-111.jpg" alt="" loading="lazy"><div><span class="part">셔츠</span><strong>노이어 차콜 셔츠</strong></div></li><li><img class="thumb" src="../items/outer-020.jpg" alt="" loading="lazy"><div><span class="part">패딩</span><strong>DISCOVERY 블랙 롱 패딩</strong></div></li><li><img class="thumb" src="../items/bottom-026.jpg" alt="" loading="lazy"><div><span class="part">청바지</span><strong>SONGZIO 블루 밴딩 청바지</strong></div></li><li><img class="thumb" src="../items/shoes-015.jpg" alt="" loading="lazy"><div><span class="part">스니커즈</span><strong>화이트 레더 스니커즈</strong></div></li><li><img class="thumb" src="../items/acc-002.jpg" alt="" loading="lazy"><div><span class="part">백팩</span><strong>YOUTH 블랙 백팩</strong></div></li></ul><button type="button" class="save" data-fav="{&quot;id&quot;: &quot;2026-11-21-2&quot;, &quot;when&quot;: &quot;11월 21일 (토)&quot;, &quot;title&quot;: &quot;노이어 차콜 셔츠 + DISCOVERY 블랙 롱 패딩&quot;, &quot;why&quot;: &quot;같은 기준의 다른 조합이에요.&quot;, &quot;img&quot;: &quot;img/2026-11-21-2.jpg&quot;, &quot;items&quot;: [{&quot;id&quot;: &quot;top-111&quot;, &quot;name&quot;: &quot;노이어 차콜 셔츠&quot;, &quot;part&quot;: &quot;셔츠&quot;}, {&quot;id&quot;: &quot;outer-020&quot;, &quot;name&quot;: &quot;DISCOVERY 블랙 롱 패딩&quot;, &quot;part&quot;: &quot;패딩&quot;}, {&quot;id&quot;: &quot;bottom-026&quot;, &quot;name&quot;: &quot;SONGZIO 블루 밴딩 청바지&quot;, &quot;part&quot;: &quot;청바지&quot;}, {&quot;id&quot;: &quot;shoes-015&quot;, &quot;name&quot;: &quot;화이트 레더 스니커즈&quot;, &quot;part&quot;: &quot;스니커즈&quot;}, {&quot;id&quot;: &quot;acc-002&quot;, &quot;name&quot;: &quot;YOUTH 블랙 백팩&quot;, &quot;part&quot;: &quot;백팩&quot;}]}">이 코디 저장</button></div></article><article class="outfit main" data-i="2" hidden><figure><img src="../img/2026-11-21-3.jpg" alt="쿠어 베이지 체크 셔츠 + K2 차콜 후드 패딩 코디" loading="lazy"></figure><div class="desc"><div class="otitle"><span class="badge auto">옷장 자동 조합</span><h3>쿠어 베이지 체크 셔츠 + K2 차콜 후드 패딩</h3></div><p class="why">같은 날씨와 격식 기준(무채색 위주, 포인트 컬러는 하나까지)으로 옷장에서 자동으로 고른 조합이에요.</p><ul class="items"><li><img class="thumb" src="../items/top-110.jpg" alt="" loading="lazy"><div><span class="part">셔츠</span><strong>쿠어 베이지 체크 셔츠</strong></div></li><li><img class="thumb" src="../items/outer-019.jpg" alt="" loading="lazy"><div><span class="part">패딩</span><strong>K2 차콜 후드 패딩</strong></div></li><li><img class="thumb" src="../items/bottom-032.jpg" alt="" loading="lazy"><div><span class="part">긴바지</span><strong>어나더 오피스 차콜 와이드 긴바지</strong></div></li><li><img class="thumb" src="../items/shoes-027.jpg" alt="" loading="lazy"><div><span class="part">스니커즈</span><strong>발렌시아가 그레이 청키 스니커즈</strong></div></li><li><img class="thumb" src="../items/acc-003.jpg" alt="" loading="lazy"><div><span class="part">숄더백</span><strong>르메르 블랙 호보 숄더백</strong></div></li></ul><button type="button" class="save" data-fav="{&quot;id&quot;: &quot;2026-11-21-3&quot;, &quot;when&quot;: &quot;11월 21일 (토)&quot;, &quot;title&quot;: &quot;쿠어 베이지 체크 셔츠 + K2 차콜 후드 패딩&quot;, &quot;why&quot;: &quot;같은 날씨와 격식 기준(무채색 위주, 포인트 컬러는 하나까지)으로 옷장에서 자동으로 고른 조합이에요.&quot;, &quot;img&quot;: &quot;img/2026-11-21-3.jpg&quot;, &quot;items&quot;: [{&quot;id&quot;: &quot;top-110&quot;, &quot;name&quot;: &quot;쿠어 베이지 체크 셔츠&quot;, &quot;part&quot;: &quot;셔츠&quot;}, {&quot;id&quot;: &quot;outer-019&quot;, &quot;name&quot;: &quot;K2 차콜 후드 패딩&quot;, &quot;part&quot;: &quot;패딩&quot;}, {&quot;id&quot;: &quot;bottom-032&quot;, &quot;name&quot;: &quot;어나더 오피스 차콜 와이드 긴바지&quot;, &quot;part&quot;: &quot;긴바지&quot;}, {&quot;id&quot;: &quot;shoes-027&quot;, &quot;name&quot;: &quot;발렌시아가 그레이 청키 스니커즈&quot;, &quot;part&quot;: &quot;스니커즈&quot;}, {&quot;id&quot;: &quot;acc-003&quot;, &quot;name&quot;: &quot;르메르 블랙 호보 숄더백&quot;, &quot;part&quot;: &quot;숄더백&quot;}]}">이 코디 저장</button></div></article><article class="outfit main" data-i="3" hidden><figure><img src="../img/2026-11-21-4.jpg" alt="POTTERY 화이트 스트라이프 셔츠 + PRADA 블랙 숏 패딩 코디" loading="lazy"></figure><div class="desc"><div class="otitle"><span class="badge auto">옷장 자동 조합</span><h3>POTTERY 화이트 스트라이프 셔츠 + PRADA 블랙 숏 패딩</h3></div><p class="why">같은 날씨와 격식 기준(무채색 위주, 포인트 컬러는 하나까지)으로 옷장에서 자동으로 고른 조합이에요.</p><ul class="items"><li><img class="thumb" src="../items/top-040.jpg" alt="" loading="lazy"><div><span class="part">셔츠</span><strong>POTTERY 화이트 스트라이프 셔츠</strong></div></li><li><img class="thumb" src="../items/outer-007.jpg" alt="" loading="lazy"><div><span class="part">패딩</span><strong>PRADA 블랙 숏 패딩</strong></div></li><li><img class="thumb" src="../items/bottom-025.jpg" alt="" loading="lazy"><div><span class="part">청바지</span><strong>WOOYOUNGMI 라이트블루 와이드 청바지</strong></div></li><li><img class="thumb" src="../items/shoes-026.jpg" alt="" loading="lazy"><div><span class="part">스니커즈</span><strong>NEW BALANCE 그레이 스니커즈</strong></div></li><li><img class="thumb" src="../items/acc-001.jpg" alt="" loading="lazy"><div><span class="part">크로스백</span><strong>생로랑 블랙 나일론 크로스백</strong></div></li></ul><button type="button" class="save" data-fav="{&quot;id&quot;: &quot;2026-11-21-4&quot;, &quot;when&quot;: &quot;11월 21일 (토)&quot;, &quot;title&quot;: &quot;POTTERY 화이트 스트라이프 셔츠 + PRADA 블랙 숏 패딩&quot;, &quot;why&quot;: &quot;같은 날씨와 격식 기준(무채색 위주, 포인트 컬러는 하나까지)으로 옷장에서 자동으로 고른 조합이에요.&quot;, &quot;img&quot;: &quot;img/2026-11-21-4.jpg&quot;, &quot;items&quot;: [{&quot;id&quot;: &quot;top-040&quot;, &quot;name&quot;: &quot;POTTERY 화이트 스트라이프 셔츠&quot;, &quot;part&quot;: &quot;셔츠&quot;}, {&quot;id&quot;: &quot;outer-007&quot;, &quot;name&quot;: &quot;PRADA 블랙 숏 패딩&quot;, &quot;part&quot;: &quot;패딩&quot;}, {&quot;id&quot;: &quot;bottom-025&quot;, &quot;name&quot;: &quot;WOOYOUNGMI 라이트블루 와이드 청바지&quot;, &quot;part&quot;: &quot;청바지&quot;}, {&quot;id&quot;: &quot;shoes-026&quot;, &quot;name&quot;: &quot;NEW BALANCE 그레이 스니커즈&quot;, &quot;part&quot;: &quot;스니커즈&quot;}, {&quot;id&quot;: &quot;acc-001&quot;, &quot;name&quot;: &quot;생로랑 블랙 나일론 크로스백&quot;, &quot;part&quot;: &quot;크로스백&quot;}]}">이 코디 저장</button></div></article><article class="outfit main" data-i="4" hidden><figure><img src="../img/2026-11-21-5.jpg" alt="포터리 라이트블루 셔츠 + 지오송지오 블랙 후드 패딩 코디" loading="lazy"></figure><div class="desc"><div class="otitle"><span class="badge auto">옷장 자동 조합</span><h3>포터리 라이트블루 셔츠 + 지오송지오 블랙 후드 패딩</h3></div><p class="why">같은 날씨와 격식 기준(무채색 위주, 포인트 컬러는 하나까지)으로 옷장에서 자동으로 고른 조합이에요.</p><ul class="items"><li><img class="thumb" src="../items/top-003.jpg" alt="" loading="lazy"><div><span class="part">셔츠</span><strong>포터리 라이트블루 셔츠</strong></div></li><li><img class="thumb" src="../items/outer-005.jpg" alt="" loading="lazy"><div><span class="part">패딩</span><strong>지오송지오 블랙 후드 패딩</strong></div></li><li><img class="thumb" src="../items/bottom-056.jpg" alt="" loading="lazy"><div><span class="part">긴바지</span><strong>쿠어 차콜 와이드 긴바지</strong></div></li><li><img class="thumb" src="../items/shoes-014.jpg" alt="" loading="lazy"><div><span class="part">슬립온</span><strong>SKECHERS 블랙 니트 슬립온</strong></div></li><li><img class="thumb" src="../items/acc-001.jpg" alt="" loading="lazy"><div><span class="part">크로스백</span><strong>생로랑 블랙 나일론 크로스백</strong></div></li></ul><button type="button" class="save" data-fav="{&quot;id&quot;: &quot;2026-11-21-5&quot;, &quot;when&quot;: &quot;11월 21일 (토)&quot;, &quot;title&quot;: &quot;포터리 라이트블루 셔츠 + 지오송지오 블랙 후드 패딩&quot;, &quot;why&quot;: &quot;같은 날씨와 격식 기준(무채색 위주, 포인트 컬러는 하나까지)으로 옷장에서 자동으로 고른 조합이에요.&quot;, &quot;img&quot;: &quot;img/2026-11-21-5.jpg&quot;, &quot;items&quot;: [{&quot;id&quot;: &quot;top-003&quot;, &quot;name&quot;: &quot;포터리 라이트블루 셔츠&quot;, &quot;part&quot;: &quot;셔츠&quot;}, {&quot;id&quot;: &quot;outer-005&quot;, &quot;name&quot;: &quot;지오송지오 블랙 후드 패딩&quot;, &quot;part&quot;: &quot;패딩&quot;}, {&quot;id&quot;: &quot;bottom-056&quot;, &quot;name&quot;: &quot;쿠어 차콜 와이드 긴바지&quot;, &quot;part&quot;: &quot;긴바지&quot;}, {&quot;id&quot;: &quot;shoes-014&quot;, &quot;name&quot;: &quot;SKECHERS 블랙 니트 슬립온&quot;, &quot;part&quot;: &quot;슬립온&quot;}, {&quot;id&quot;: &quot;acc-001&quot;, &quot;name&quot;: &quot;생로랑 블랙 나일론 크로스백&quot;, &quot;part&quot;: &quot;크로스백&quot;}]}">이 코디 저장</button></div></article><article class="outfit main" data-i="5" hidden><figure><img src="../img/2026-11-21-6.jpg" alt="IEY 그레이 긴팔 티 + TIME HOMME 블랙 숏 패딩 코디" loading="lazy"></figure><div class="desc"><div class="otitle"><span class="badge auto">옷장 자동 조합</span><h3>IEY 그레이 긴팔 티 + TIME HOMME 블랙 숏 패딩</h3></div><p class="why">같은 날씨와 격식 기준(무채색 위주, 포인트 컬러는 하나까지)으로 옷장에서 자동으로 고른 조합이에요.</p><ul class="items"><li><img class="thumb" src="../items/top-060.jpg" alt="" loading="lazy"><div><span class="part">긴팔 티</span><strong>IEY 그레이 긴팔 티</strong></div></li><li><img class="thumb" src="../items/outer-022.jpg" alt="" loading="lazy"><div><span class="part">패딩</span><strong>TIME HOMME 블랙 숏 패딩</strong></div></li><li><img class="thumb" src="../items/bottom-009.jpg" alt="" loading="lazy"><div><span class="part">긴바지</span><strong>쿠어 카키 와이드 긴바지</strong></div></li><li><img class="thumb" src="../items/shoes-027.jpg" alt="" loading="lazy"><div><span class="part">스니커즈</span><strong>발렌시아가 그레이 청키 스니커즈</strong></div></li><li><img class="thumb" src="../items/acc-001.jpg" alt="" loading="lazy"><div><span class="part">크로스백</span><strong>생로랑 블랙 나일론 크로스백</strong></div></li></ul><button type="button" class="save" data-fav="{&quot;id&quot;: &quot;2026-11-21-6&quot;, &quot;when&quot;: &quot;11월 21일 (토)&quot;, &quot;title&quot;: &quot;IEY 그레이 긴팔 티 + TIME HOMME 블랙 숏 패딩&quot;, &quot;why&quot;: &quot;같은 날씨와 격식 기준(무채색 위주, 포인트 컬러는 하나까지)으로 옷장에서 자동으로 고른 조합이에요.&quot;, &quot;img&quot;: &quot;img/2026-11-21-6.jpg&quot;, &quot;items&quot;: [{&quot;id&quot;: &quot;top-060&quot;, &quot;name&quot;: &quot;IEY 그레이 긴팔 티&quot;, &quot;part&quot;: &quot;긴팔 티&quot;}, {&quot;id&quot;: &quot;outer-022&quot;, &quot;name&quot;: &quot;TIME HOMME 블랙 숏 패딩&quot;, &quot;part&quot;: &quot;패딩&quot;}, {&quot;id&quot;: &quot;bottom-009&quot;, &quot;name&quot;: &quot;쿠어 카키 와이드 긴바지&quot;, &quot;part&quot;: &quot;긴바지&quot;}, {&quot;id&quot;: &quot;shoes-027&quot;, &quot;name&quot;: &quot;발렌시아가 그레이 청키 스니커즈&quot;, &quot;part&quot;: &quot;스니커즈&quot;}, {&quot;id&quot;: &quot;acc-001&quot;, &quot;name&quot;: &quot;생로랑 블랙 나일론 크로스백&quot;, &quot;part&quot;: &quot;크로스백&quot;}]}">이 코디 저장</button></div></article></div>
+<footer>사진은 Acloset에 등록한 내 옷이에요.</footer></div>
+<script>
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('#outfits .outfit')), n=cards.length, i=0;
+  var next=document.getElementById('next'), prev=document.getElementById('prev'), count=document.getElementById('count');
+  document.documentElement.classList.add('js');
+  if(n<2){ next.hidden=true; prev.hidden=true; count.hidden=true; return; }
+  function show(k){
+    i=(k+n)%n;
+    cards.forEach(function(c,j){ c.hidden = j!==i; });
+    count.textContent=(i+1)+' / '+n; prev.disabled = i===0;
+  }
+  next.addEventListener('click', function(){ show(i+1); cards[i].scrollIntoView({block:'nearest', behavior:'smooth'}); });
+  prev.addEventListener('click', function(){ if(i>0){ show(i-1); cards[i].scrollIntoView({block:'nearest', behavior:'smooth'}); } });
+})();
+</script><script>
+(function(){
+  var KEY='savedOutfits';
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY))||[]; }catch(e){ return []; } }
+  function store(a){ try{ localStorage.setItem(KEY, JSON.stringify(a)); return true; }catch(e){ return false; } }
+  function paint(b,on){ b.setAttribute('aria-pressed', on?'true':'false'); b.textContent = on?'저장됨 · 누르면 취소':'이 코디 저장'; }
+  [].forEach.call(document.querySelectorAll('button.save'), function(b){
+    var v=JSON.parse(b.getAttribute('data-fav'));
+    paint(b, load().some(function(x){ return x.id===v.id; }));
+    b.addEventListener('click', function(){
+      var a=load(), on=a.some(function(x){ return x.id===v.id; });
+      if(on){ a=a.filter(function(x){ return x.id!==v.id; }); } else { v.saved=Date.now(); a.push(v); }
+      if(store(a)) paint(b,!on); else b.textContent='이 브라우저에서는 저장할 수 없어요';
+    });
+  });
+})();
+</script></body></html>
