@@ -8,10 +8,11 @@
   "formal": 2,
   "sleeve": "l",
   "warmth": 3,
-  "desc": "블랙 모크넥 니트",
+  "desc": "블랙 모크넥 니트 (목이 따가움 — 다른 선택지가 없을 때만)",
   "brand": "미나브",
   "acloset_cat": "니트",
-  "casual_only": true
+  "casual_only": true,
+  "comfort": "low"
  },
  {
   "id": "top-002",
@@ -353,10 +354,11 @@
   "formal": 2,
   "sleeve": "l",
   "warmth": 3,
-  "desc": "블랙 모크넥 니트",
+  "desc": "블랙 모크넥 니트 (목이 따가움 — 다른 선택지가 없을 때만)",
   "brand": "",
   "acloset_cat": "니트",
-  "casual_only": true
+  "casual_only": true,
+  "comfort": "low"
  },
  {
   "id": "top-028",
