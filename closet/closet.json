@@ -2231,10 +2231,11 @@
   "color": "charcoal",
   "formal": 1,
   "sleeve": "l",
-  "warmth": 2,
-  "desc": "차콜 밴딩 와이드 팬츠",
+  "warmth": 1,
+  "desc": "차콜 밴딩 와이드 팬츠 (얇은 여름용)",
   "brand": "쿠어",
-  "acloset_cat": "긴바지"
+  "acloset_cat": "긴바지",
+  "season": "summer"
  },
  {
   "id": "bottom-057",
