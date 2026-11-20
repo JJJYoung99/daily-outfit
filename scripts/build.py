@@ -4,6 +4,7 @@
 day.json outfits list item ids from closet/closet.json; this script composes each outfit
 image from closet/items/<id>.jpg and writes docs/index.html + docs/archive/<date>.html.
 """
+import hashlib
 import html, json, pathlib, sys
 from PIL import Image
 
@@ -165,6 +166,8 @@ section { display:flex; flex-direction:column; gap:10px; }
 .save { font:inherit; font-size:14px; font-weight:500; padding:10px 16px; min-height:44px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--fg); cursor:pointer; margin-top:12px; }
 .save:hover, .save:focus-visible { border-color:var(--accent); color:var(--accent); }
 .save[aria-pressed="true"] { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
+.daynav { background:var(--fg); color:var(--bg); border-color:var(--fg); font-weight:700; }
+.daynav[hidden] { display:none; }
 .js .outfit[hidden] { display:none; }
 .badge.auto { background:transparent; color:var(--accent); border:1px solid var(--accent); }
 footer { font-size:12px; color:var(--muted); }
@@ -205,6 +208,31 @@ SAVE_JS = r"""
 })();
 """
 
+DAY_LIST = []
+DAY_JS = r"""
+(function(){
+  var n=new Date(), p=function(x){ return (x<10?'0':'')+x; };
+  var today=n.getFullYear()+'-'+p(n.getMonth()+1)+'-'+p(n.getDate());
+  var t=new Date(n.getTime()+864e5), tom=t.getFullYear()+'-'+p(t.getMonth()+1)+'-'+p(t.getDate());
+  var root=IS_INDEX?'':'../', latest=DAYS[0], nav=document.getElementById('daynav');
+  function url(d){ return d===latest ? root+'?day=next' : root+'archive/'+d+'.html'; }
+  function label(d){ return (+d.slice(5,7))+'월 '+(+d.slice(8,10))+'일'; }
+  var has=function(d){ return DAYS.indexOf(d)>=0; };
+  // 첫 화면: 저녁 6시 전에는 오늘 코디를 먼저 보여준다.
+  if(IS_INDEX && location.search.indexOf('day=next')<0 && PAGE_DATE>today && has(today) && n.getHours()<18){ location.replace(root+'archive/'+today+'.html'); return; }
+  var other = PAGE_DATE===today && has(tom) ? [tom,'내일('+label(tom)+') 코디 보기 →'] :
+              PAGE_DATE!==today && has(today) ? [today,'← 오늘('+label(today)+') 코디 보기'] : null;
+  if(other){ nav.href=url(other[0]); nav.textContent=other[1]; nav.hidden=false; }
+  var h=document.querySelector('h1');
+  if(PAGE_DATE===today) h.textContent='오늘 · '+h.textContent; else if(PAGE_DATE===tom) h.textContent='내일 · '+h.textContent;
+})();
+"""
+
+
+def img_key(o):
+    """코디 구성이 바뀌면 달라지는 짧은 키: 사진을 다시 그릴지 판단하고, 브라우저 캐시도 피한다."""
+    return hashlib.md5(",".join(it["id"] for it in o["items"]).encode()).hexdigest()[:8]
+
 
 def outfit_block(d, o, idx, prefix):
     rows = ""
@@ -217,11 +245,11 @@ def outfit_block(d, o, idx, prefix):
              '<span class="badge auto">옷장 자동 조합</span>' if o.get("auto") else '<span class="badge alt">대안</span>')
     hidden = " hidden" if idx else ""
     fav = json.dumps({"id": f'{d["date"]}-{idx + 1}', "when": fmt_date(d["date"], d["weekday"]), "title": o["title"], "why": o["why"],
-                      "img": f'img/{d["date"]}-{idx + 1}.jpg',
+                      "img": f'img/{d["date"]}-{idx + 1}.jpg?v={img_key(o)}',
                       "items": [{"id": it["id"], "name": CLOSET[it["id"]]["name"],
                                  "part": CLOSET[it["id"]].get("acloset_cat") or PART[CLOSET[it["id"]]["cat"]]} for it in o["items"]]},
                      ensure_ascii=False)
-    return (f'<article class="outfit main" data-i="{idx}"{hidden}><figure><img src="{prefix}img/{d["date"]}-{idx + 1}.jpg" alt="{e(o["title"])} 코디" loading="lazy"></figure>'
+    return (f'<article class="outfit main" data-i="{idx}"{hidden}><figure><img src="{prefix}img/{d["date"]}-{idx + 1}.jpg?v={img_key(o)}" alt="{e(o["title"])} 코디" loading="lazy"></figure>'
             f'<div class="desc"><div class="otitle">{badge}<h3>{e(o["title"])}</h3></div><p class="why">{e(o["why"])}</p>'
             f'<ul class="items">{rows}</ul><button type="button" class="save" data-fav="{e(fav)}">이 코디 저장</button></div></article>')
 
@@ -249,6 +277,7 @@ def render(d, history, prefix):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>{CSS}</style></head><body><div class="wrap">
 <header><span class="eyebrow">ACLOSET 옷장 기반 · 매일 저녁 8시 업데이트</span><h1>{e(fmt_date(d['date'], d['weekday']))} 코디</h1></header>
+<a class="navlink daynav" id="daynav" hidden></a>
 <a class="navlink" href="{prefix}style.html">내 스타일 리포트 · 트렌드 · 쇼핑 리스트 →</a>
 <a class="navlink" href="{prefix}favorites.html">저장한 코디 →</a>
 <div class="ribbon"><span class="chip">{e(w['place'])} · {e(w['summary'])}</span><span class="chip">기온 <b>{w['low']}° / {w['high']}°</b></span>
@@ -256,7 +285,7 @@ def render(d, history, prefix):
 <p class="note">{e(w.get('note'))} {e(d['tpo'].get('source'))}</p>
 {switch}<div id="outfits">{blocks}</div>{refs}{hist}
 <footer>사진은 Acloset에 등록한 내 옷이에요.</footer></div>
-<script>{JS}</script><script>{SAVE_JS}</script></body></html>"""
+<script>var PAGE_DATE="{d['date']}", IS_INDEX={"true" if not prefix else "false"}, DAYS={json.dumps(DAY_LIST)};{DAY_JS}</script><script>{JS}</script><script>{SAVE_JS}</script></body></html>"""
 
 
 NEUTRAL = {"black", "white", "gray", "lightgray", "charcoal", "ivory", "silver"}
@@ -449,11 +478,16 @@ def build():
     if not days:
         raise SystemExit("no days")
     (DOCS / "archive").mkdir(parents=True, exist_ok=True)
+    mf = DOCS / "img" / "manifest.json"
+    manifest = json.loads(mf.read_text(encoding="utf-8")) if mf.exists() else {}
     for d in days[:30]:
         for i, o in enumerate(all_outfits(d)):
             p = DOCS / "img" / f"{d['date']}-{i + 1}.jpg"
-            if not p.exists() or d is days[0]:
+            key = img_key(o)
+            if not p.exists() or manifest.get(p.name) != key:  # 구성이 바뀐 코디만 다시 그린다
                 compose([it["id"] for it in o["items"]], p)
+            manifest[p.name] = key
+    mf.write_text(json.dumps(manifest, indent=0, sort_keys=True), encoding="utf-8")
     (DOCS / "items").mkdir(parents=True, exist_ok=True)
     for d in days[:30]:
         for o in all_outfits(d):
@@ -461,6 +495,7 @@ def build():
                 src, dst = ITEMS / f"{it['id']}.jpg", DOCS / "items" / f"{it['id']}.jpg"
                 if not dst.exists():
                     dst.write_bytes(src.read_bytes())
+    DAY_LIST[:] = [d["date"] for d in days[:30]]
     for i, d in enumerate(days[:30]):
         (DOCS / "archive" / f"{d['date']}.html").write_text(render(d, [], "../"), encoding="utf-8")
     (DOCS / "index.html").write_text(render(days[0], days[1:13], ""), encoding="utf-8")
