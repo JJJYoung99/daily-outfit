@@ -3,71 +3,119 @@
  "weekday": "토",
  "weather": {
   "place": "서울",
+  "summary": "대체로 맑고 강추위",
   "low": -5,
-  "high": 0,
+  "high": 2,
   "rain": 0,
-  "summary": "대체로 맑음",
-  "note": "최저 -5°, 최고 0°예요."
+  "note": "아침 -5°, 낮에도 2°에 그치는 영하권 추위예요. 패딩처럼 바람을 막는 두꺼운 아우터에 기모 후드나 니트를 받쳐 입고, 눈비 소식은 없어서 스니커즈도 괜찮아요."
  },
  "tpo": {
   "label": "휴일 외출",
-  "source": "오늘은 자동 백업 추천이에요. 일정은 반영되지 않았어요."
+  "source": "캘린더를 볼 수 없어 토요일 기준 휴일 외출로 정했어요."
  },
  "outfits": [
   {
    "pick": true,
-   "title": "ZAVANAS 블랙 긴팔 티 + NOIR LARMES 브라운 무스탕",
-   "why": "무채색 위주에 포인트 컬러는 하나까지만 쓰는 기준으로 날씨에 맞춰 골랐어요.",
+   "title": "POLO RALPH LAUREN 라이트그레이 후드 + PRADA 블랙 숏 패딩",
+   "why": "블랙, 차콜, 그레이만 쓴 무채색 휴일 코디예요. 블랙 패딩은 전부 블랙으로 맞추기보다 그레이를 섞어 깊이를 주고, 볼륨 있는 숏 패딩에는 와이드 팬츠로 비율을 맞추는 게 요즘 방식이라 라이트그레이 후드와 차콜 와이드 바지를 골랐어요. 영하 5°까지 내려가도 패딩과 후드 조합이면 든든해요.",
    "items": [
     {
-     "id": "top-093",
-     "note": ""
+     "id": "outer-007",
+     "note": "PRADA 블랙 숏 패딩이에요. 기장이 짧아 와이드 바지와 비율이 좋아요."
     },
     {
-     "id": "outer-029",
-     "note": ""
+     "id": "top-023",
+     "note": "POLO RALPH LAUREN 라이트그레이 후드예요. 패딩 밖으로 후드를 꺼내 목을 덮고, 블랙 사이에서 밝은 면을 만들어요."
     },
     {
-     "id": "bottom-039",
-     "note": ""
+     "id": "bottom-056",
+     "note": "쿠어 차콜 와이드 긴바지예요. 패딩의 볼륨과 맞는 넉넉한 통이에요."
     },
     {
-     "id": "shoes-006",
-     "note": ""
+     "id": "shoes-026",
+     "note": "NEW BALANCE 그레이 스니커즈로 후드와 색을 이어요. 맑은 날이라 스웨이드도 괜찮아요."
     },
     {
-     "id": "acc-003",
-     "note": ""
+     "id": "acc-001",
+     "note": "생로랑 블랙 나일론 크로스백은 패딩 위로 메기 편해요."
     }
    ]
   },
   {
    "pick": false,
-   "title": "노이어 차콜 셔츠 + DISCOVERY 블랙 롱 패딩",
-   "why": "같은 기준의 다른 조합이에요.",
+   "title": "NONBLANK 브라운 하프집 니트 + TIME HOMME 블랙 숏 패딩",
+   "why": "올블랙에 브라운 하나만 넣은 포인트 컬러 버전이에요. 블랙 패딩에 브라운 계열을 조금만 더해도 흔한 블랙 패딩 차림에서 벗어난다는 매거진 조언을 따랐어요. 두꺼운 하프집 니트라 실내에서 패딩을 벗어도 단정해요.",
    "items": [
     {
-     "id": "top-111",
-     "note": ""
+     "id": "outer-022",
+     "note": "TIME HOMME 블랙 숏 패딩이에요. 광택이 적어 니트와 잘 어울려요."
     },
     {
-     "id": "outer-020",
-     "note": ""
+     "id": "top-021",
+     "note": "NONBLANK 브라운 하프집 니트예요. 이 코디의 유일한 색이고, 집업을 올리면 목까지 따뜻해요."
     },
     {
-     "id": "bottom-026",
-     "note": ""
+     "id": "bottom-039",
+     "note": "ART IF ACTS 블랙 투턱 청바지로 아래를 블랙으로 정리해요."
     },
     {
-     "id": "shoes-015",
-     "note": ""
+     "id": "shoes-022",
+     "note": "DR. MARTENS 블랙 레더 구두예요. 밑창이 두꺼워 언 길에서도 발이 덜 시려요."
     },
     {
-     "id": "acc-002",
-     "note": ""
+     "id": "acc-003",
+     "note": "르메르 블랙 호보 숄더백이에요."
+    }
+   ]
+  },
+  {
+   "pick": false,
+   "title": "ART IF ACTS 블랙 브이넥 니트 + NOIR LARMES 브라운 무스탕",
+   "why": "패딩 대신 무스탕을 입는 결이 다른 조합이에요. 안쪽은 블랙과 화이트로만 두고 브라운 무스탕 하나만 색으로 써서, 무채색 위에 질감 좋은 아우터가 주인공이 되게 했어요. 안감 털이 있어 영하에도 버틸 만해요.",
+   "items": [
+    {
+     "id": "outer-029",
+     "note": "NOIR LARMES 브라운 무스탕이에요. 이 코디의 유일한 색이에요."
+    },
+    {
+     "id": "top-033",
+     "note": "ART IF ACTS 블랙 브이넥 니트예요. 브이넥 사이로 화이트 티가 살짝 보여요."
+    },
+    {
+     "id": "top-070",
+     "note": "ZAVANAS 화이트 긴팔 티를 니트 안에 받쳐 입어 한 겹 더 따뜻하게 해요."
+    },
+    {
+     "id": "bottom-027",
+     "note": "SONGZIO 블랙 와이드 긴바지로 무스탕의 부피와 균형을 맞춰요."
+    },
+    {
+     "id": "shoes-006",
+     "note": "BALENCIAGA 그레이 러닝 스니커즈예요. 휴일이라 부피 있는 신발도 괜찮아요."
+    },
+    {
+     "id": "acc-003",
+     "note": "르메르 블랙 호보 숄더백이에요."
     }
    ]
   }
  ],
- "refs": []
+ "refs": [
+  {
+   "label": "보그 코리아 · 패딩부터 코트까지, 각 아우터별 최고의 스타일링 6",
+   "url": "https://www.vogue.co.kr/2024/11/25/%ed%8c%a8%eb%94%a9%eb%b6%80%ed%84%b0-%ec%bd%94%ed%8a%b8%ea%b9%8c%ec%a7%80-%ea%b0%81-%ec%95%84%ec%9a%b0%ed%84%b0%eb%b3%84-%ec%b5%9c%ea%b3%a0%ec%9d%98-%ec%8a%a4%ed%83%80%ec%9d%bc%eb%a7%81-6/"
+  },
+  {
+   "label": "Mens Flair · Ways To Wear A Puffer Jacket: 20 Modern Outfits",
+   "url": "https://mensflair.com/puffer-jacket-outfits-men/"
+  },
+  {
+   "label": "The VOU · Nineteen Black Monochrome Outfit Ideas for Men",
+   "url": "https://thevou.com/blog/black-monochrome-outfit-ideas-men"
+  },
+  {
+   "label": "29CM · 키워드로 제안하는 트렌디한 스타일링 (FW 아우터)",
+   "url": "https://www.29cm.co.kr/content/29-style-recipe/2026/10/fwouter"
+  }
+ ]
 }
