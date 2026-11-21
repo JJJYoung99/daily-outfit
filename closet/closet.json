@@ -2213,13 +2213,13 @@
  {
   "id": "bottom-055",
   "cat": "bottom",
-  "name": "쿠어 블랙 투턱 정장바지",
+  "name": "쿠어 다크브라운 투턱 정장바지",
   "sub": "slacks",
-  "color": "black",
+  "color": "darkbrown",
   "formal": 3,
   "sleeve": "l",
   "warmth": 2,
-  "desc": "블랙 투턱 벌룬 슬랙스",
+  "desc": "다크브라운 투턱 벌룬 슬랙스",
   "brand": "쿠어",
   "acloset_cat": "정장바지"
  },
