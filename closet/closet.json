@@ -1905,15 +1905,16 @@
  {
   "id": "bottom-032",
   "cat": "bottom",
-  "name": "어나더 오피스 차콜 와이드 긴바지",
+  "name": "어나더 오피스 그린그레이 와이드 긴바지",
   "sub": "pants",
-  "color": "charcoal",
+  "color": "greengray",
   "formal": 2,
   "sleeve": "l",
   "warmth": 2,
-  "desc": "차콜 와이드 팬츠",
+  "desc": "딥그린에 가까운 그레이 와이드 팬츠. 골반 쪽이 볼록하게 떠서 핏이 어색함 — 쓸 때는 골반을 덮는 긴 상의·아우터와만",
   "brand": "어나더 오피스",
-  "acloset_cat": "긴바지"
+  "acloset_cat": "긴바지",
+  "low_priority": true
  },
  {
   "id": "bottom-033",
