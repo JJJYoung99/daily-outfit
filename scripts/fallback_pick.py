@@ -73,6 +73,20 @@ def pick(w, weekday, seed, formal=None, avoid=()):
     return combo + [rnd.choice(bags)]
 
 
+def work_status(day):
+    """schedule/work.json 기준: True=근무, False=휴일, None=모름(일정표 밖)."""
+    f = ROOT / "schedule" / "work.json"
+    if not f.exists():
+        return None, None
+    sc = json.loads(f.read_text(encoding="utf-8"))
+    d = day.isoformat()
+    if d in sc.get("work", {}):
+        return True, sc["work"][d]
+    if any(c["from"] <= d <= c["to"] for c in sc.get("covered", [])):
+        return False, None
+    return None, None
+
+
 def main():
     now = dt.datetime.now(ZoneInfo("Asia/Seoul"))
     tmr = (now + dt.timedelta(days=1)).date()
@@ -81,14 +95,19 @@ def main():
         print("already exists", out)
         return
     w = weather(tmr.isoformat())
-    a, b = pick(w, tmr.weekday(), tmr.toordinal()), pick(w, tmr.weekday(), tmr.toordinal() + 7)
+    known, kind = work_status(tmr)
+    work = tmr.weekday() < 5 if known is None else known
+    wd = 0 if work else 6  # pick()은 요일로 근무/휴일을 가르므로 근무일정에 맞춰 넘긴다
+    label = ("근무 (늦게 끝나는 날)" if kind == "night" else "근무") if work else "휴일 외출"
+    src = "근무 일정표를 보고 정했어요." if known is not None else "근무 일정표에 없는 날이라 요일로 추정했어요."
+    a, b = pick(w, wd, tmr.toordinal()), pick(w, wd, tmr.toordinal() + 7)
     gap = w["high"] - w["low"]
     note = f"최저 {w['low']}°, 최고 {w['high']}°예요." + (" 일교차가 커서 겉옷을 챙기세요." if gap >= 8 else "") + (" 비 소식이 있어 가죽이나 고무 밑창 신발로 골랐어요." if w["rain"] >= 50 else "")
     mk = lambda combo: [{"id": i["id"], "note": ""} for i in combo]
     title = lambda combo: " + ".join(i["name"] for i in combo[:2])
     day = {"date": tmr.isoformat(), "weekday": WEEK[tmr.weekday()],
            "weather": {"place": "서울", **w, "note": note},
-           "tpo": {"label": "평일 출근" if tmr.weekday() < 5 else "휴일 외출", "source": "오늘은 자동 백업 추천이에요. 일정은 반영되지 않았어요."},
+           "tpo": {"label": label, "source": "오늘은 자동 백업 추천이에요. " + src},
            "outfits": [{"pick": True, "title": title(a), "why": "무채색 위주에 포인트 컬러는 하나까지만 쓰는 기준으로 날씨에 맞춰 골랐어요.", "items": mk(a)},
                        {"pick": False, "title": title(b), "why": "같은 기준의 다른 조합이에요.", "items": mk(b)}],
            "refs": []}
