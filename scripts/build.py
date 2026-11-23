@@ -157,7 +157,7 @@ section { display:flex; flex-direction:column; gap:10px; }
 .strip span { display:block; font-size:12px; color:var(--muted); margin-top:6px; line-height:1.4; }
 .navlink { display:inline-flex; align-items:center; gap:6px; padding:10px 16px; border-radius:999px; background:var(--surface); border:1px solid var(--line); text-decoration:none; font-weight:500; width:fit-content; }
 .navlink:hover, .navlink:focus-visible { border-color:var(--accent); color:var(--accent); }
-.switch { display:flex; align-items:center; gap:10px; flex-wrap:wrap; position:sticky; bottom:0; z-index:5; background:var(--bg); padding:10px 0 calc(10px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); }
+.switch { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 12px; }
 .switch button { font:inherit; font-size:15px; font-weight:700; padding:12px 20px; border-radius:999px; border:0; background:var(--fg); color:var(--bg); cursor:pointer; min-height:44px; }
 .switch button.ghost { background:transparent; color:var(--fg); border:1px solid var(--line); font-weight:500; padding:12px 16px; }
 .switch button:disabled { opacity:.35; cursor:default; }
@@ -283,7 +283,7 @@ def render(d, history, prefix):
 <div class="ribbon"><span class="chip">{e(w['place'])} · {e(w['summary'])}</span><span class="chip">기온 <b>{w['low']}° / {w['high']}°</b></span>
 <span class="chip rain">강수확률 <b>{w['rain']}%</b></span><span class="chip tpo">{e(d['tpo']['label'])}</span></div>
 <p class="note">{e(w.get('note'))} {e(d['tpo'].get('source'))}</p>
-<div id="outfits">{blocks}</div>{switch}{refs}{hist}
+{switch}<div id="outfits">{blocks}</div>{refs}{hist}
 <footer>사진은 Acloset에 등록한 내 옷이에요.</footer></div>
 <script>var PAGE_DATE="{d['date']}", IS_INDEX={"true" if not prefix else "false"}, DAYS={json.dumps(DAY_LIST)};{DAY_JS}</script><script>{JS}</script><script>{SAVE_JS}</script></body></html>"""
 
