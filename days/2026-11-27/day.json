@@ -1,0 +1,73 @@
+{
+ "date": "2026-11-27",
+ "weekday": "금",
+ "weather": {
+  "place": "서울",
+  "low": 8,
+  "high": 16,
+  "rain": 45,
+  "summary": "이슬비",
+  "note": "최저 8°, 최고 16°예요. 일교차가 커서 겉옷을 챙기세요."
+ },
+ "tpo": {
+  "label": "근무",
+  "source": "오늘은 자동 백업 추천이에요. 근무 일정표에 없는 날이라 요일로 추정했어요."
+ },
+ "outfits": [
+  {
+   "pick": true,
+   "title": "ART IF ACTS 차콜 웨스턴 셔츠 + TONYWACK 그레이 가디건",
+   "why": "무채색 위주에 포인트 컬러는 하나까지만 쓰는 기준으로 날씨에 맞춰 골랐어요.",
+   "items": [
+    {
+     "id": "top-063",
+     "note": ""
+    },
+    {
+     "id": "outer-056",
+     "note": ""
+    },
+    {
+     "id": "bottom-027",
+     "note": ""
+    },
+    {
+     "id": "shoes-028",
+     "note": ""
+    },
+    {
+     "id": "acc-002",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "pick": false,
+   "title": "WAVINESS 그레이 스트라이프 셔츠 + JUNNE 블랙 후드 집업",
+   "why": "같은 기준의 다른 조합이에요.",
+   "items": [
+    {
+     "id": "top-054",
+     "note": ""
+    },
+    {
+     "id": "outer-050",
+     "note": ""
+    },
+    {
+     "id": "bottom-009",
+     "note": ""
+    },
+    {
+     "id": "shoes-014",
+     "note": ""
+    },
+    {
+     "id": "acc-003",
+     "note": ""
+    }
+   ]
+  }
+ ],
+ "refs": []
+}
