@@ -12,7 +12,8 @@
   "brand": "미나브",
   "acloset_cat": "니트",
   "casual_only": true,
-  "comfort": "low"
+  "comfort": "low",
+  "exclude": "on_hold"
  },
  {
   "id": "top-002",
@@ -358,7 +359,8 @@
   "brand": "",
   "acloset_cat": "니트",
   "casual_only": true,
-  "comfort": "low"
+  "comfort": "low",
+  "exclude": "on_hold"
  },
  {
   "id": "top-028",
@@ -373,7 +375,8 @@
   "brand": "",
   "acloset_cat": "니트",
   "casual_only": true,
-  "comfort": "low"
+  "comfort": "low",
+  "exclude": "on_hold"
  },
  {
   "id": "top-029",
@@ -3514,5 +3517,31 @@
   "desc": "차콜 핀스트라이프 투턱 와이드 슬랙스 (Slacks Product. 72)",
   "brand": "ADER ERROR",
   "acloset_cat": "정장바지"
+ },
+ {
+  "id": "top-115",
+  "cat": "top",
+  "name": "더니트컴퍼니 그레이 캐시미어 모크넥 니트",
+  "sub": "knit",
+  "color": "gray",
+  "formal": 2,
+  "sleeve": "l",
+  "warmth": 2,
+  "desc": "그레이 캐시미어 100% 모크넥 니트 (XXL). 아주 얇아서 안에 티를 받쳐 입어야 함. 블레이저·코트 이너로 좋음",
+  "brand": "더니트컴퍼니",
+  "acloset_cat": "니트"
+ },
+ {
+  "id": "top-116",
+  "cat": "top",
+  "name": "더니트컴퍼니 블랙 캐시미어 모크넥 니트",
+  "sub": "knit",
+  "color": "black",
+  "formal": 2,
+  "sleeve": "l",
+  "warmth": 2,
+  "desc": "블랙 캐시미어 100% 모크넥 니트 (XXL). 아주 얇아서 안에 티를 받쳐 입어야 함. 블레이저·코트 이너로 좋음",
+  "brand": "더니트컴퍼니",
+  "acloset_cat": "니트"
  }
 ]
