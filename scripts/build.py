@@ -231,7 +231,10 @@ DAY_JS = r"""
 
 def img_key(o):
     """코디 구성이 바뀌면 달라지는 짧은 키: 사진을 다시 그릴지 판단하고, 브라우저 캐시도 피한다."""
-    return hashlib.md5(",".join(it["id"] for it in o["items"]).encode()).hexdigest()[:8]
+    def sig(i):  # 옷 사진이 바뀌어도 다시 그리게 사진 파일 크기를 함께 넣는다
+        f = ROOT / "closet" / "items" / f"{i}.jpg"
+        return f"{i}:{f.stat().st_size if f.exists() else 0}"
+    return hashlib.md5(",".join(sig(it["id"]) for it in o["items"]).encode()).hexdigest()[:8]
 
 
 def outfit_block(d, o, idx, prefix):
