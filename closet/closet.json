@@ -2705,13 +2705,13 @@
  {
   "id": "outer-035",
   "cat": "outer",
-  "name": "IN SILENCE 차콜 싱글 블레이저",
+  "name": "IN SILENCE 블랙 싱글 블레이저",
   "sub": "blazer",
-  "color": "charcoal",
+  "color": "black",
   "formal": 3,
   "sleeve": "l",
   "warmth": 2,
-  "desc": "차콜 싱글 블레이저",
+  "desc": "블랙 싱글 블레이저",
   "brand": "IN SILENCE",
   "acloset_cat": "블레이저"
  },
