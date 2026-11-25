@@ -1919,15 +1919,16 @@
  {
   "id": "bottom-033",
   "cat": "bottom",
-  "name": "siiido 블랙 카고바지",
+  "name": "siiido 차콜 카고바지",
   "sub": "pants",
-  "color": "black",
+  "color": "charcoal",
   "formal": 2,
   "sleeve": "l",
   "warmth": 2,
-  "desc": "블랙 카고 슬랙스",
+  "desc": "진회색 카고 슬랙스",
   "brand": "siiido",
-  "acloset_cat": "카고바지"
+  "acloset_cat": "카고바지",
+  "exclude": "on_hold"
  },
  {
   "id": "bottom-034",
