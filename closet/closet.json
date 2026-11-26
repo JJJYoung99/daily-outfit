@@ -1579,13 +1579,13 @@
  {
   "id": "bottom-007",
   "cat": "bottom",
-  "name": "블랭크룸 차콜 투턱 정장바지",
+  "name": "블랭크룸 그레이브라운 투턱 정장바지",
   "sub": "slacks",
-  "color": "charcoal",
+  "color": "darkbrown",
   "formal": 3,
   "sleeve": "l",
   "warmth": 2,
-  "desc": "차콜 투턱 와이드 슬랙스",
+  "desc": "그레이 기운이 도는 다크브라운 투턱 슬랙스",
   "brand": "블랭크룸",
   "acloset_cat": "정장바지"
  },
