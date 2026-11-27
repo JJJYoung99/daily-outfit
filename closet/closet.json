@@ -81,7 +81,8 @@
   "warmth": 1,
   "desc": "블랙 슬림 반팔티",
   "brand": "51퍼센트",
-  "acloset_cat": "반팔 티셔츠"
+  "acloset_cat": "반팔 티셔츠",
+  "no_work": true
  },
  {
   "id": "top-007",
@@ -120,7 +121,8 @@
   "warmth": 1,
   "desc": "블랙 립 긴팔티",
   "brand": "51퍼센트",
-  "acloset_cat": "긴팔 티"
+  "acloset_cat": "긴팔 티",
+  "no_work": true
  },
  {
   "id": "top-010",
@@ -702,7 +704,8 @@
   "warmth": 1,
   "desc": "블랙 립 긴팔티 (2)",
   "brand": "51PERCENT",
-  "acloset_cat": "긴팔 티"
+  "acloset_cat": "긴팔 티",
+  "no_work": true
  },
  {
   "id": "top-054",
@@ -3011,9 +3014,10 @@
   "formal": 2,
   "sleeve": "l",
   "warmth": 2,
-  "desc": "그레이 멜란지 가디건",
+  "desc": "그레이 멜란지 가디건. 안에 다른 옷을 받쳐 입지 않고 단추를 잠가 단독으로 입음",
   "brand": "RECTO",
-  "acloset_cat": "가디건"
+  "acloset_cat": "가디건",
+  "no_inner": true
  },
  {
   "id": "outer-059",

@@ -48,8 +48,10 @@ def pick(w, weekday, seed, formal=None, avoid=()):
     if formal is None:
         formal = 2 if weekday < 5 else 1
     # 저가 니트(casual_only)는 아주 편한 휴일(formal 1)에만 쓴다.
+    # no_work(근무일에 안 입는 옷)는 근무일(weekday < 5)에는 아예 빼고 고른다.
     by = lambda cat, f=lambda i: True: [i for i in CLOSET if i["cat"] == cat and f(i)
-                                        and not (i.get("casual_only") and formal >= 2)]
+                                        and not (i.get("casual_only") and formal >= 2)
+                                        and not (i.get("no_work") and weekday < 5)]
     sleeve = "s" if avg >= 22 else "l"
     tops = by("top", lambda i: i["sleeve"] == sleeve and i["sub"] not in ("tank",) and abs(i["formal"] - formal) <= 1 and i["id"] not in avoid)
     if avg < 15:
@@ -63,6 +65,8 @@ def pick(w, weekday, seed, formal=None, avoid=()):
         combo = [weighted(rnd, tops), weighted(rnd, bottoms), weighted(rnd, shoes, work=weekday < 5)]
         if outers:
             combo.insert(1, weighted(rnd, outers))
+            if combo[1].get("no_inner"):  # 안에 받쳐 입지 않는 가디건은 상의 없이 단독으로
+                combo.pop(0)
         subs = {i["sub"] for i in combo}
         if "knit" in subs and subs & {"cardigan", "knitzip"}:  # 니트 이너 + 니트 가디건/집업 조합은 쓰지 않는다
             continue
