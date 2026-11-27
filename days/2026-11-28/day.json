@@ -3,71 +3,58 @@
  "weekday": "토",
  "weather": {
   "place": "서울",
-  "low": 1,
-  "high": 8,
-  "rain": 4,
-  "summary": "구름 조금",
-  "note": "최저 1°, 최고 8°예요."
+  "summary": "맑음, 바람 강함",
+  "low": 3,
+  "high": 9,
+  "rain": 10,
+  "note": "전날보다 아침 기온이 크게 떨어지고 바람이 강해 체감은 더 추워요. 엉덩이를 덮는 울 코트나 패딩에 니트를 받쳐 입고, 비·눈 소식은 없어 신발은 자유롭게 골라도 돼요."
  },
  "tpo": {
   "label": "휴일 외출",
-  "source": "오늘은 자동 백업 추천이에요. 근무 일정표에 없는 날이라 요일로 추정했어요."
+  "source": "근무 일정표에 없는 날이라 추정했어요. 캘린더도 볼 수 없어 주말이라 휴일 외출로 봤어요."
  },
  "outfits": [
   {
    "pick": true,
-   "title": "ZAVANAS 스카이블루 맨투맨 + 지오송지오 블랙 후드 패딩",
-   "why": "무채색 위주에 포인트 컬러는 하나까지만 쓰는 기준으로 날씨에 맞춰 골랐어요.",
+   "title": "RECTO 그레이 헤링본 코트 + 더니트컴퍼니 그레이 캐시미어 모크넥 니트",
+   "why": "그레이 코트에 그레이 니트를 겹친 톤온톤 코디예요. MR PORTER도 한 색 코디는 톤과 소재를 살짝 바꾸면 밋밋하지 않다고 하는데, 헤링본 울과 캐시미어 결이 그 역할을 해요. 하의와 신발은 블랙으로 내려 아래를 정리했고, 바람 부는 날 모크넥이 목을 막아줘요.",
    "items": [
-    {
-     "id": "top-050",
-     "note": ""
-    },
-    {
-     "id": "outer-005",
-     "note": ""
-    },
-    {
-     "id": "bottom-030",
-     "note": ""
-    },
-    {
-     "id": "shoes-027",
-     "note": ""
-    },
-    {
-     "id": "acc-002",
-     "note": ""
-    }
+    {"id": "outer-024", "note": "단추를 잠가 바람을 막고, 실내에선 열어 입어요."},
+    {"id": "top-115", "note": "모크넥이 코트 깃 사이로 보이게 해 그레이 톤을 이어요."},
+    {"id": "bottom-015", "note": "JUNNE 블랙 스트레이트 청바지로 주말답게 힘을 빼요."},
+    {"id": "shoes-022", "note": "DR. MARTENS 블랙 레더 구두로 코트 무게감에 맞춰요."},
+    {"id": "acc-006", "note": "줄로리아 실버 목걸이를 모크넥 위로 살짝 보이게 해요."},
+    {"id": "acc-001", "note": "생로랑 블랙 나일론 크로스백으로 손을 가볍게."}
    ]
   },
   {
    "pick": false,
-   "title": "siiido 차콜 폴로 카라 티 + NOIR LARMES 브라운 무스탕",
-   "why": "같은 기준의 다른 조합이에요.",
+   "title": "K2 차콜 후드 패딩 + POTTERY 차콜 폴로 니트",
+   "why": "오래 걷거나 바람을 더 막고 싶을 때의 따뜻한 버전이에요. 차콜 패딩과 차콜 폴로 니트에 그레이 와이드 청바지, 그레이 청키 스니커즈로 회색 계열만 이어 편하지만 정돈돼 보여요.",
    "items": [
-    {
-     "id": "top-051",
-     "note": ""
-    },
-    {
-     "id": "outer-029",
-     "note": ""
-    },
-    {
-     "id": "bottom-003",
-     "note": ""
-    },
-    {
-     "id": "shoes-002",
-     "note": ""
-    },
-    {
-     "id": "acc-002",
-     "note": ""
-    }
+    {"id": "outer-019", "note": "후드까지 올리면 강한 바람에도 든든해요."},
+    {"id": "top-030", "note": "카라를 패딩 밖으로 꺼내 얼굴 주변을 단정하게."},
+    {"id": "bottom-031", "note": "노이어 그레이 와이드 청바지로 하체를 여유 있게."},
+    {"id": "shoes-027", "note": "발렌시아가 그레이 청키 스니커즈는 휴일에 쓰기 좋아요."},
+    {"id": "acc-002", "note": "YOUTH 블랙 백팩으로 양손을 비워요."}
+   ]
+  },
+  {
+   "pick": false,
+   "title": "쿠어 카멜 더블 코트 + TONYWACK 블랙 케이블 니트",
+   "why": "포인트 컬러를 카멜 하나만 쓴 버전이에요. GQ 코리아 기온별 코트 가이드처럼 4~8°에는 두툼한 울 코트에 니트를 받치는 게 좋고, 안쪽을 전부 블랙으로 맞춰 카멜 코트만 돋보이게 했어요.",
+   "items": [
+    {"id": "outer-023", "note": "더블 단추를 잠가 입으면 바람에도 실루엣이 유지돼요."},
+    {"id": "top-020", "note": "도톰한 케이블 니트라 코트 안에서 보온을 책임져요."},
+    {"id": "bottom-039", "note": "ART IF ACTS 블랙 투턱 청바지로 격식과 편안함 사이를 맞춰요."},
+    {"id": "shoes-017", "note": "Loake 블랙 캡토 구두로 코트 격에 맞게 마무리해요."},
+    {"id": "acc-003", "note": "르메르 블랙 호보 숄더백."}
    ]
   }
  ],
- "refs": []
+ "refs": [
+  {"label": "GQ 코리아 · 17도부터 영하까지, '얼죽코'를 위한 기온별 남자 코트 스타일링 가이드", "url": "https://www.gqkorea.co.kr/2025/11/14/17%eb%8f%84%eb%b6%80%ed%84%b0-%ec%98%81%ed%95%98%ea%b9%8c%ec%a7%80-%ec%96%bc%ec%a3%bd%ec%bd%94%eb%a5%bc-%ec%9c%84%ed%95%9c-%ea%b8%b0%ec%98%a8%eb%b3%84-%eb%82%a8%ec%9e%90-%ec%bd%94%ed%8a%b8/"},
+  {"label": "MR PORTER · Styling Out The Cold", "url": "https://www.mrporter.com/en-ch/journal/fashion/styling-out-the-cold-697956"},
+  {"label": "The VOU · Nineteen Black Monochrome Outfit Ideas for Men", "url": "https://thevou.com/blog/black-monochrome-outfit-ideas-men"}
+ ]
 }
