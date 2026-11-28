@@ -3,71 +3,59 @@
  "weekday": "일",
  "weather": {
   "place": "서울",
-  "low": -2,
-  "high": 6,
+  "summary": "맑음, 바람 강함",
+  "low": -1,
+  "high": 8,
   "rain": 0,
-  "summary": "대체로 맑음",
-  "note": "최저 -2°, 최고 6°예요. 일교차가 커서 겉옷을 챙기세요."
+  "note": "아침은 영하권이고 바람이 강해 체감온도가 더 낮아요. 낮엔 8°까지 올라 일교차가 9°라, 두툼한 아우터 안에 벗어도 되는 니트 한 겹으로 맞추세요."
  },
  "tpo": {
   "label": "휴일 외출",
-  "source": "오늘은 자동 백업 추천이에요. 근무 일정표에 없는 날이라 요일로 추정했어요."
+  "source": "근무 일정표에 없는 날이라 추정했어요. 캘린더에 접근할 수 없어 일요일=휴일 외출로 봤어요."
  },
  "outfits": [
   {
    "pick": true,
-   "title": "노이어 블루그레이 셔츠 + 지오송지오 블랙 후드 패딩",
-   "why": "무채색 위주에 포인트 컬러는 하나까지만 쓰는 기준으로 날씨에 맞춰 골랐어요.",
+   "title": "TONYWACK 블랙 케이블 니트 + PRADA 블랙 숏 패딩",
+   "why": "올블랙 겨울 룩은 색 대신 소재 차이로 완성한다는 가이드대로, 매끈한 PRADA 블랙 숏 패딩 안에 결이 도드라지는 TONYWACK 블랙 케이블 니트를 넣었어요. 하의는 노이어 그레이 와이드 청바지, 신발은 BALENCIAGA 그레이 러닝 스니커즈로 그레이 톤온톤을 맞춰 휴일답게 편하게 풀었어요.",
    "items": [
-    {
-     "id": "top-112",
-     "note": ""
-    },
-    {
-     "id": "outer-005",
-     "note": ""
-    },
-    {
-     "id": "bottom-003",
-     "note": ""
-    },
-    {
-     "id": "shoes-011",
-     "note": ""
-    },
-    {
-     "id": "acc-002",
-     "note": ""
-    }
+    {"id": "top-020", "note": "도톰한 케이블 니트 한 장으로 보온과 질감을 챙겨요. 낮에 패딩을 벗어도 이것만으로 충분해요."},
+    {"id": "outer-007", "note": "짧은 기장이라 와이드 청바지 실루엣이 살아요. 아침 바람엔 지퍼를 끝까지 올리세요."},
+    {"id": "bottom-031", "note": "한 번도 안 나온 바지예요. 그레이 데님이 블랙 상의를 가볍게 받쳐 줘요."},
+    {"id": "shoes-006", "note": "바지 색과 맞춘 그레이 스니커즈. 맑은 날이라 스웨이드·메시도 괜찮아요."},
+    {"id": "acc-002", "note": "휴일엔 손이 자유로운 YOUTH 블랙 백팩으로."},
+    {"id": "acc-006", "note": "니트 목선 위로 줄로리아 실버 목걸이를 살짝 보이게 해서 올블랙에 빛을 하나 더해요."}
    ]
   },
   {
    "pick": false,
-   "title": "MINAV 블랙 긴팔 티 + PRADA 블랙 숏 패딩",
-   "why": "같은 기준의 다른 조합이에요.",
+   "title": "POTTERY 차콜 폴로 니트 + RECTO 블랙 발마칸 코트",
+   "why": "블랙 코트가 늘 비슷해 보이면 이너의 결과 톤을 바꾸라는 제안을 따라 RECTO 블랙 발마칸 코트에 POTTERY 차콜 폴로 니트를 넣었어요. 저녁 약속이 생겨도 어울리는 조금 더 단정한 버전이에요.",
    "items": [
-    {
-     "id": "top-045",
-     "note": ""
-    },
-    {
-     "id": "outer-007",
-     "note": ""
-    },
-    {
-     "id": "bottom-018",
-     "note": ""
-    },
-    {
-     "id": "shoes-006",
-     "note": ""
-    },
-    {
-     "id": "acc-001",
-     "note": ""
-    }
+    {"id": "top-030", "note": "카라가 있어 코트 안에서도 얼굴 주변이 단정해 보여요."},
+    {"id": "outer-026", "note": "넉넉한 발마칸 코트라 바람 부는 아침에 엉덩이까지 덮어 따뜻해요."},
+    {"id": "bottom-022", "note": "siiido 차콜 커브드 청바지로 차콜 톤을 위아래로 이어요."},
+    {"id": "shoes-005", "note": "로스트가든 블랙 레더 로퍼로 코트의 격식에 맞춰요."},
+    {"id": "acc-003", "note": "르메르 블랙 호보 숄더백으로 정리."}
+   ]
+  },
+  {
+   "pick": false,
+   "title": "ART IF ACTS 차콜 헨리넥 긴팔 티 + NOIR LARMES 브라운 무스탕",
+   "why": "모노톤에 포인트 컬러 하나만 더하라는 조언대로 브라운은 NOIR LARMES 브라운 무스탕 하나에만 썼어요. 안쪽 털이 두꺼워 이너는 ART IF ACTS 차콜 헨리넥 긴팔 티 한 장이면 되고, 나머지는 블랙으로 눌렀어요.",
+   "items": [
+    {"id": "top-047", "note": "아직 안 입어 본 헨리넥 티. 무스탕이 두꺼워서 이너는 얇게 가요."},
+    {"id": "outer-029", "note": "코디의 유일한 포인트 컬러. 앞을 열어도 털 안감 덕분에 따뜻해요."},
+    {"id": "bottom-027", "note": "SONGZIO 블랙 와이드 긴바지로 하의는 차분하게."},
+    {"id": "shoes-014", "note": "SKECHERS 블랙 니트 슬립온으로 휴일엔 편하게 신고 벗어요."},
+    {"id": "acc-001", "note": "생로랑 블랙 나일론 크로스백."}
    ]
   }
  ],
- "refs": []
+ "refs": [
+  {"label": "에스콰이어 코리아 · 남성 겨울 블랙 코트 스타일링", "url": "https://www.esquirekorea.co.kr/article/1913302"},
+  {"label": "엘르 코리아 · 그레이 톤온톤 겨울 룩", "url": "https://www.elle.co.kr/article/1892866"},
+  {"label": "SANVT · All black everything: monochrome styles in winter", "url": "https://sanvt.com/blogs/journal/all-black-everything-monochrome-styles-in-winter"},
+  {"label": "THE VOU · Black Monochrome Outfit Ideas for Men", "url": "https://thevou.com/blog/black-monochrome-outfit-ideas-men"}
+ ]
 }
