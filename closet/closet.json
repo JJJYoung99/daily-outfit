@@ -2178,7 +2178,8 @@
   "warmth": 2,
   "desc": "블랙 투턱 슬랙스",
   "brand": "블랭크룸",
-  "acloset_cat": "정장바지"
+  "acloset_cat": "정장바지",
+  "exclude": "not_owned"
  },
  {
   "id": "bottom-052",
