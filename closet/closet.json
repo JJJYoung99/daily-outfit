@@ -2000,7 +2000,8 @@
   "warmth": 2,
   "desc": "블랙 와이드 데님",
   "brand": "GLW",
-  "acloset_cat": "청바지"
+  "acloset_cat": "청바지",
+  "low_priority": true
  },
  {
   "id": "bottom-039",
