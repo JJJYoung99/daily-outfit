@@ -1525,7 +1525,8 @@
   "warmth": 2,
   "desc": "블랙 투턱 와이드 슬랙스",
   "brand": "유스",
-  "acloset_cat": "정장바지"
+  "acloset_cat": "정장바지",
+  "exclude": "on_hold"
  },
  {
   "id": "bottom-003",
